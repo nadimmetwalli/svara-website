@@ -840,6 +840,8 @@ img { max-width: 100%; display: block; }
   letter-spacing: -.01em;
 }
 .mq-sep { color: var(--gray-200) !important; font-weight: 300 !important; }
+.marquee-label-2 { margin-top: 28px; }
+.marquee-inner-reverse { animation-direction: reverse; }
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
