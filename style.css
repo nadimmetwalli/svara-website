@@ -1470,7 +1470,7 @@ img { max-width: 100%; display: block; }
 .int-logos {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 0;
   width: max-content;
 }
 
@@ -1488,7 +1488,9 @@ img { max-width: 100%; display: block; }
 .int-scroll-right { animation: scroll-right 24s linear infinite; }
 .int-scroll-left  { animation: scroll-left  24s linear infinite; }
 
-/* Individual logo card */
+/* Individual logo card — margin-right instead of flex gap so that
+   each set's total width is exactly half the inner strip width,
+   making translateX(-50%) land precisely at the duplicate boundary */
 .int-logo-card {
   display: flex;
   align-items: center;
@@ -1503,6 +1505,7 @@ img { max-width: 100%; display: block; }
   font-size: 13px;
   font-weight: 600;
   color: var(--gray-700);
+  margin-right: 14px;
 }
 
 .int-logo-img {
