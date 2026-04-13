@@ -1406,32 +1406,91 @@ img { max-width: 100%; display: block; }
   background: var(--gray-50);
 }
 .integrations-section .section-sub { margin-bottom: 56px; }
-.int-marquee {
-  overflow: hidden;
-  padding: 48px 0;
+
+.int-orbit-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 56px 0;
   border-top: 1px solid var(--gray-200);
   margin-top: 56px;
+  overflow: hidden;
 }
-.int-inner {
+
+/* Gradient masks — logos appear to flow into the SVARA centre */
+.int-mask-left,
+.int-mask-right {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 220px;
+  z-index: 2;
+  pointer-events: none;
+}
+.int-mask-left  { left: 0;  background: linear-gradient(to right, var(--gray-50) 20%, transparent 100%); }
+.int-mask-right { right: 0; background: linear-gradient(to left,  var(--gray-50) 20%, transparent 100%); }
+
+/* Central SVARA medallion */
+.int-svara-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 88px;
+  height: 88px;
+  background: var(--dark);
+  border-radius: 50%;
+  border: 1.5px solid rgba(124,58,237,.5);
+  box-shadow: 0 0 0 10px rgba(11,11,20,.7), 0 0 48px rgba(124,58,237,.35);
+}
+.int-svara-center img  { width: 26px; height: 26px; }
+.int-svara-center span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  color: rgba(255,255,255,.85);
+  text-transform: uppercase;
+}
+
+/* Scrolling rows */
+.int-row { overflow: hidden; }
+
+.int-logos {
   display: flex;
   align-items: center;
-  gap: 16px;
-  animation: marquee 22s linear infinite;
+  gap: 14px;
   width: max-content;
 }
-.int-pill {
+.int-logos-fwd { animation: marquee 32s linear infinite; }
+.int-logos-rev { animation: marquee 32s linear infinite reverse; }
+
+/* Individual logo card */
+.int-logo-card {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 24px;
+  gap: 9px;
+  padding: 11px 18px;
   background: var(--white);
   border: 1px solid var(--gray-200);
-  border-radius: 100px;
+  border-radius: var(--radius);
   white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
   font-size: 13px;
   font-weight: 600;
   color: var(--gray-700);
-  box-shadow: var(--shadow-sm);
+}
+
+.int-logo-img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
   flex-shrink: 0;
 }
 
