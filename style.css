@@ -1409,47 +1409,55 @@ img { max-width: 100%; display: block; }
 
 .int-orbit-wrap {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
   padding: 56px 0;
   border-top: 1px solid var(--gray-200);
   margin-top: 56px;
+}
+
+/* Single row containing left + right halves */
+.int-single-row {
+  display: flex;
+  align-items: center;
+}
+
+/* Each half takes 50% of the width and clips its scrolling content */
+.int-half {
+  flex: 1;
   overflow: hidden;
+  min-width: 0;
 }
 
-/* Gradient masks — logos appear to flow into the SVARA centre */
-.int-mask-left,
-.int-mask-right {
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 220px;
-  z-index: 2;
-  pointer-events: none;
+/* CSS mask: logos fade in from the outer edge, fade out into the centre */
+.int-half-left {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 18%, black 72%, transparent 100%);
+  mask-image:         linear-gradient(to right, transparent 0%, black 18%, black 72%, transparent 100%);
 }
-.int-mask-left  { left: 0;  background: linear-gradient(to right, var(--gray-50) 20%, transparent 100%); }
-.int-mask-right { right: 0; background: linear-gradient(to left,  var(--gray-50) 20%, transparent 100%); }
+.int-half-right {
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, black 18%, black 72%, transparent 100%);
+  mask-image:         linear-gradient(to left, transparent 0%, black 18%, black 72%, transparent 100%);
+}
 
-/* Central SVARA medallion */
+/* Central SVARA medallion — sits above both halves */
 .int-svara-center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 3;
+  z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  width: 88px;
-  height: 88px;
+  width: 90px;
+  height: 90px;
   background: var(--dark);
   border-radius: 50%;
   border: 1.5px solid rgba(124,58,237,.5);
-  box-shadow: 0 0 0 10px rgba(11,11,20,.7), 0 0 48px rgba(124,58,237,.35);
+  box-shadow: 0 0 0 10px var(--gray-50), 0 0 48px rgba(124,58,237,.3);
+  pointer-events: none;
 }
-.int-svara-center img  { width: 26px; height: 26px; }
+.int-svara-center img { width: 26px; height: 26px; }
 .int-svara-center span {
   font-size: 10px;
   font-weight: 800;
@@ -1458,17 +1466,27 @@ img { max-width: 100%; display: block; }
   text-transform: uppercase;
 }
 
-/* Scrolling rows */
-.int-row { overflow: hidden; }
-
+/* Scrolling strips */
 .int-logos {
   display: flex;
   align-items: center;
   gap: 14px;
   width: max-content;
 }
-.int-logos-fwd { animation: marquee 32s linear infinite; }
-.int-logos-rev { animation: marquee 32s linear infinite reverse; }
+
+/* Left half scrolls RIGHT toward centre: from -50% → 0 */
+@keyframes scroll-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+/* Right half scrolls LEFT toward centre: from 0 → -50% */
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.int-scroll-right { animation: scroll-right 24s linear infinite; }
+.int-scroll-left  { animation: scroll-left  24s linear infinite; }
 
 /* Individual logo card */
 .int-logo-card {
