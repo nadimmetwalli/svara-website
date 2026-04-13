@@ -1,0 +1,115 @@
+/* ── Navbar: scroll behaviour ──────────────────────────── */
+const navbar = document.getElementById('navbar');
+let lastY = 0;
+
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  navbar.classList.toggle('scrolled', y > 40);
+  lastY = y;
+}, { passive: true });
+
+/* ── Mobile menu ───────────────────────────────────────── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', open);
+});
+
+// Close on nav link click
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+});
+
+/* ── Smooth scroll for anchor links ───────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id === '#') return;
+    const target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    const offset = 72; // navbar height
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+
+/* ── Intersection Observer: fade-up animations ─────────── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+/* ── Counter animation for stat values ─────────────────── */
+function animateCounter(el) {
+  const target = parseInt(el.getAttribute('data-count'));
+  if (!target) return;
+  const duration = 1600;
+  const start = performance.now();
+
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(eased * target);
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target;
+  }
+  requestAnimationFrame(step);
+}
+
+const counterObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target.querySelector('[data-count]');
+      if (el) animateCounter(el);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-card').forEach(card => counterObserver.observe(card));
+
+/* ── Demo form: submit handler ─────────────────────────── */
+const form = document.getElementById('demoForm');
+const success = document.getElementById('formSuccess');
+
+if (form) {
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    // Simulate network delay
+    setTimeout(() => {
+      form.style.display = 'none';
+      success.classList.add('show');
+    }, 1200);
+  });
+}
+
+/* ── Pause marquee on hover ────────────────────────────── */
+document.querySelectorAll('.marquee-inner, .int-inner').forEach(el => {
+  el.addEventListener('mouseenter', () => el.style.animationPlayState = 'paused');
+  el.addEventListener('mouseleave', () => el.style.animationPlayState = 'running');
+});
+
+/* ── FAQ accordion ─────────────────────────────────────── */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
