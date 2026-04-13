@@ -829,7 +829,7 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   gap: 40px;
-  animation: marquee 30s linear infinite;
+  animation: marquee 40s linear infinite;
   width: max-content;
 }
 .marquee-inner span {
