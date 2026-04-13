@@ -1427,14 +1427,14 @@ img { max-width: 100%; display: block; }
   min-width: 0;
 }
 
-/* CSS mask: logos fade in from the outer edge, fade out into the centre */
+/* Logos clip hard at the outer edge, fade only toward the centre */
 .int-half-left {
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 18%, black 72%, transparent 100%);
-  mask-image:         linear-gradient(to right, transparent 0%, black 18%, black 72%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 0%, black 65%, transparent 100%);
+  mask-image:         linear-gradient(to right, black 0%, black 65%, transparent 100%);
 }
 .int-half-right {
-  -webkit-mask-image: linear-gradient(to left, transparent 0%, black 18%, black 72%, transparent 100%);
-  mask-image:         linear-gradient(to left, transparent 0%, black 18%, black 72%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, black 0%, black 65%, transparent 100%);
+  mask-image:         linear-gradient(to left, black 0%, black 65%, transparent 100%);
 }
 
 /* Central SVARA medallion — sits above both halves */
