@@ -80,21 +80,43 @@ const counterObserver = new IntersectionObserver(entries => {
 document.querySelectorAll('.stat-card').forEach(card => counterObserver.observe(card));
 
 /* ── Demo form: submit handler ─────────────────────────── */
+// Formspree endpoint — sign up at formspree.io, create a form linked
+// to info@svara-ai.com, then replace YOUR_FORM_ID with your 8-char ID.
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
 const form = document.getElementById('demoForm');
 const success = document.getElementById('formSuccess');
 
 if (form) {
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
-    btn.textContent = 'Sending…';
+    const originalHTML = btn.innerHTML;
+
+    btn.innerHTML = 'Sending…';
     btn.disabled = true;
 
-    // Simulate network delay
-    setTimeout(() => {
-      form.style.display = 'none';
-      success.classList.add('show');
-    }, 1200);
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (res.ok) {
+        form.style.display = 'none';
+        success.classList.add('show');
+      } else {
+        // Surface the error but don't expose internal details
+        throw new Error(`Server responded with ${res.status}`);
+      }
+    } catch (err) {
+      console.error('[SVARA] Demo form submission failed:', err);
+      btn.innerHTML = originalHTML;
+      btn.disabled = false;
+      // Friendly fallback — open email directly so no lead is lost
+      alert('Something went wrong. Please email us directly at info@svara-ai.com and we\'ll get back to you within a day.');
+    }
   });
 }
 
