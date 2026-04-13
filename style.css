@@ -1427,10 +1427,18 @@ img { max-width: 100%; display: block; }
   min-width: 0;
 }
 
-/* Logos clip hard at the outer edge, fade only toward the centre */
+/* Mirror the left half so it uses the SAME scroll-left animation as the right half.
+   scaleX(-1) reverses the visual scroll direction without any translateX(-50%) alignment risk. */
 .int-half-left {
-  -webkit-mask-image: linear-gradient(to right, black 0%, black 65%, transparent 100%);
-  mask-image:         linear-gradient(to right, black 0%, black 65%, transparent 100%);
+  transform: scaleX(-1);
+  /* After scaleX(-1), CSS "to left" becomes visual "to right":
+     outer edge (visual-left) = opaque, center (visual-right) = transparent */
+  -webkit-mask-image: linear-gradient(to left, black 0%, black 65%, transparent 100%);
+  mask-image:         linear-gradient(to left, black 0%, black 65%, transparent 100%);
+}
+/* Counter-mirror each card so text and logos render the right way round */
+.int-half-left .int-logo-card {
+  transform: scaleX(-1);
 }
 .int-half-right {
   -webkit-mask-image: linear-gradient(to left, black 0%, black 65%, transparent 100%);
