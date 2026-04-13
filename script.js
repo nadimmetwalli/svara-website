@@ -120,6 +120,65 @@ if (form) {
   });
 }
 
+/* ── Demo audio player ─────────────────────────────────── */
+const audio       = document.getElementById('demoAudio');
+const playBtn     = document.getElementById('playBtn');
+const iconPlay    = document.getElementById('iconPlay');
+const iconPause   = document.getElementById('iconPause');
+const progressFill = document.getElementById('progressFill');
+const progressWrap = document.getElementById('progressWrap');
+const currentTimeEl = document.getElementById('currentTime');
+const totalTimeEl   = document.getElementById('totalTime');
+const waveform    = document.getElementById('playerWaveform');
+
+function formatTime(seconds) {
+  if (!isFinite(seconds)) return '–:––';
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+if (audio) {
+  audio.addEventListener('loadedmetadata', () => {
+    totalTimeEl.textContent = formatTime(audio.duration);
+  });
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play();
+      iconPlay.style.display  = 'none';
+      iconPause.style.display = 'block';
+      waveform.classList.add('playing');
+    } else {
+      audio.pause();
+      iconPlay.style.display  = 'block';
+      iconPause.style.display = 'none';
+      waveform.classList.remove('playing');
+    }
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    currentTimeEl.textContent = formatTime(audio.currentTime);
+    const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+    progressFill.style.width = `${pct}%`;
+  });
+
+  // Click on progress bar to seek
+  progressWrap.addEventListener('click', e => {
+    const rect = progressWrap.getBoundingClientRect();
+    const pct  = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = pct * audio.duration;
+  });
+
+  audio.addEventListener('ended', () => {
+    iconPlay.style.display  = 'block';
+    iconPause.style.display = 'none';
+    waveform.classList.remove('playing');
+    progressFill.style.width = '0%';
+    currentTimeEl.textContent = '0:00';
+  });
+}
+
 /* ── Pause marquee on hover ────────────────────────────── */
 document.querySelectorAll('.marquee-inner, .int-inner').forEach(el => {
   el.addEventListener('mouseenter', () => el.style.animationPlayState = 'paused');

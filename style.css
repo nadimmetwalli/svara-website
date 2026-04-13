@@ -1054,12 +1054,43 @@ img { max-width: 100%; display: block; }
   letter-spacing: .06em;
 }
 
+.player-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.player-play-btn {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--violet);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2px; /* optical centre for play triangle */
+  transition: background .2s, transform .15s;
+  box-shadow: var(--shadow-violet);
+}
+
+.player-play-btn:hover { background: var(--violet-dark); transform: scale(1.06); }
+.player-play-btn:active { transform: scale(.97); }
+
+.player-right {
+  flex: 1;
+  min-width: 0;
+}
+
 .player-waveform {
   display: flex;
   align-items: center;
   gap: 3px;
-  height: 48px;
-  margin-bottom: 12px;
+  height: 40px;
+  margin-bottom: 10px;
 }
 
 .pw-bar {
@@ -1067,31 +1098,44 @@ img { max-width: 100%; display: block; }
   background: var(--violet-light);
   border-radius: 2px;
   height: var(--h, 60%);
-  opacity: .5;
+  opacity: .3;
   transition: opacity .2s;
+  transform-origin: center;
 }
 
-.pw-play-btn {
-  width: 36px;
-  height: 36px;
-  flex: none;
-  background: var(--violet);
-  border-radius: 50%;
-  opacity: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+/* Bars animate while audio is playing */
+.player-waveform.playing .pw-bar {
+  opacity: .7;
+  animation: pw-bounce 1s ease-in-out infinite alternate;
+}
+
+.player-waveform.playing .pw-bar:nth-child(odd)  { animation-delay: 0s; }
+.player-waveform.playing .pw-bar:nth-child(even) { animation-delay: .15s; }
+.player-waveform.playing .pw-bar:nth-child(3n)   { animation-delay: .3s; }
+.player-waveform.playing .pw-bar:nth-child(4n)   { animation-delay: .45s; }
+
+@keyframes pw-bounce {
+  from { transform: scaleY(.5); opacity: .4; }
+  to   { transform: scaleY(1);  opacity: .9; }
+}
+
+.player-progress-wrap {
+  width: 100%;
+  height: 4px;
+  background: var(--gray-200);
+  border-radius: 2px;
   cursor: pointer;
+  margin-bottom: 8px;
+  position: relative;
 }
 
-.pw-play-btn::after {
-  content: '';
-  border-style: solid;
-  border-width: 6px 0 6px 10px;
-  border-color: transparent transparent transparent white;
-  position: absolute;
-  left: 14px;
+.player-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--violet);
+  border-radius: 2px;
+  transition: width .1s linear;
+  pointer-events: none;
 }
 
 .player-times {
