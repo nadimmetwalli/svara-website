@@ -199,10 +199,6 @@ img { max-width: 100%; display: block; }
   flex-shrink: 0;
 }
 .logo-mark {
-  width: 30px;
-  height: 30px;
-  background: var(--violet);
-  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
