@@ -82,7 +82,7 @@ document.querySelectorAll('.stat-card').forEach(card => counterObserver.observe(
 /* ── Demo form: submit handler ─────────────────────────── */
 // Formspree endpoint — sign up at formspree.io, create a form linked
 // to info@svara-ai.com, then replace YOUR_FORM_ID with your 8-char ID.
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xrergzpp';
 
 const form = document.getElementById('demoForm');
 const success = document.getElementById('formSuccess');
