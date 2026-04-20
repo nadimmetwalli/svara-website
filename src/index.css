@@ -410,6 +410,7 @@ img { max-width: 100%; display: block; }
   color: rgba(255,255,255,.55);
   margin-bottom: 36px;
   white-space: nowrap;
+  max-width: 100%;
 }
 
 .hero-h1 {
@@ -1827,12 +1828,13 @@ img { max-width: 100%; display: block; }
 @media (max-width: 768px) {
   .navbar { top: 12px; }
   .hero-h1 { font-size: clamp(36px, 8vw, 56px); }
-  .hero-eyebrow { font-size: 11px; }
+  .hero-eyebrow { font-size: 9px; white-space: normal; text-align: center; padding: 0 16px; letter-spacing: .08em; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .cmp-grid { grid-template-columns: 1fr; }
   .demo-grid { grid-template-columns: 1fr; gap: 40px; }
-  .steps-row { flex-direction: column; align-items: center; }
-  .step-line { width: 1px; height: 40px; background: linear-gradient(180deg, transparent, var(--violet-light), transparent); margin: 0; }
+  .steps-row { display: flex; flex-direction: column; align-items: stretch; }
+  .step-line { width: 1px; height: 40px; background: linear-gradient(180deg, transparent, var(--violet-light), transparent); margin: 0 auto; }
+  .step { text-align: left; padding: 28px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: span 2; }
   .features-grid { grid-template-columns: 1fr; }
@@ -2056,7 +2058,7 @@ img { max-width: 100%; display: block; }
   .cmp-col { padding: 28px 20px; }
 
   /* Step cards: full width padding */
-  .step { padding: 0 8px; text-align: center; }
+  .step { padding: 24px 20px; text-align: left; }
 
   /* CTA banner heading */
   .cta-inner h2 { font-size: clamp(24px, 7vw, 36px); }
