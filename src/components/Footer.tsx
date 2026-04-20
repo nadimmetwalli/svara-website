@@ -83,7 +83,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-legal">
-          <p>SVARA TECHNOLOGIES OÜ · Registry code: 17234663 · Harju maakond, Tallinn, Kesklinna linnaosa, Narva mnt 2-62, 10117, Estonia</p>
+          <p>SVARA TECHNOLOGIES OÜ · Registry code: 17453177 · Harju maakond, Tallinn, Kesklinna linnaosa, Narva mnt 2-62, 10117, Estonia</p>
           <p>
             <a href="mailto:info@svara-ai.com">info@svara-ai.com</a>
             {' · '}
