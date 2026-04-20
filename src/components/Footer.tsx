@@ -82,8 +82,17 @@ export default function Footer() {
           </div>
         </div>
 
+        <div className="footer-legal">
+          <p>SVARA TECHNOLOGIES OÜ · Registry code: 17234663 · Harju maakond, Tallinn, Kesklinna linnaosa, Narva mnt 2-62, 10117, Estonia</p>
+          <p>
+            <a href="mailto:info@svara-ai.com">info@svara-ai.com</a>
+            {' · '}
+            <a href="tel:+37256983182">+372 5698 3182</a>
+          </p>
+        </div>
+
         <div className="footer-bottom">
-          <p>© 2026 SVARA AI. All rights reserved.</p>
+          <p>© 2026 SVARA TECHNOLOGIES OÜ. All rights reserved.</p>
           <p>Built for hospitality. Powered by AI.</p>
         </div>
       </div>
