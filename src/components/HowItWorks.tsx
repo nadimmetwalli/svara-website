@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom'
+import { ROUTES } from '../routes'
+
 interface Step {
   num: string
   icon: React.ReactNode
@@ -39,15 +42,6 @@ const STEPS: Step[] = [
 ]
 
 export default function HowItWorks() {
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const href = e.currentTarget.getAttribute('href')
-    if (!href) return
-    const target = document.querySelector(href)
-    if (!target) return
-    e.preventDefault()
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' })
-  }
-
   return (
     <section className="how-section" id="how-it-works">
       <div className="container">
@@ -57,9 +51,9 @@ export default function HowItWorks() {
             <h2 className="section-h2">Get live and connected<br />in less than 48 hours</h2>
             <p className="section-sub">No new hardware. No training staff. We integrate directly into the systems you already use.</p>
           </div>
-          <a href="#demo" className="btn-primary btn-lg how-cta" onClick={handleAnchorClick}>
+          <Link to={ROUTES.demo} className="btn-primary btn-lg how-cta">
             Start your integration →
-          </a>
+          </Link>
         </div>
 
         <div className="steps-row">

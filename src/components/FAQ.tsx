@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { ROUTES } from '../routes'
 
 interface FAQItem {
   q: string
@@ -35,15 +37,6 @@ const FAQS: FAQItem[] = [
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const href = e.currentTarget.getAttribute('href')
-    if (!href) return
-    const target = document.querySelector(href)
-    if (!target) return
-    e.preventDefault()
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' })
-  }
-
   return (
     <section className="faq-section" id="faq">
       <div className="container">
@@ -55,9 +48,9 @@ export default function FAQ() {
             <div className="faq-still">
               <p><strong>Still have questions?</strong></p>
               <p>Get in touch now and we can help you with all your queries right away.</p>
-              <a href="#demo" className="btn-primary" style={{ marginTop: 16 }} onClick={handleAnchorClick}>
+              <Link to={ROUTES.demo} className="btn-primary" style={{ marginTop: 16 }}>
                 Book a Demo →
-              </a>
+              </Link>
             </div>
           </div>
 

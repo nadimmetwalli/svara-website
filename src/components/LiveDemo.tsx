@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { ROUTES } from '../routes'
 
 const WAVEFORM_HEIGHTS = [35, 60, 80, 50, 90, 45, 70, 55, 85, 40, 75, 60, 95, 50, 70, 40, 65, 80, 45, 55]
 
@@ -61,15 +63,6 @@ function AudioPlayer() {
     audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration
   }
 
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const href = e.currentTarget.getAttribute('href')
-    if (!href) return
-    const target = document.querySelector(href)
-    if (!target) return
-    e.preventDefault()
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' })
-  }
-
   return (
     <div className="player-card">
       <audio ref={audioRef} src="/demo-call-recording.mp3" preload="metadata" />
@@ -110,23 +103,14 @@ function AudioPlayer() {
           </div>
         </div>
       </div>
-      <a href="#demo" className="btn-primary btn-full" style={{ marginTop: 20 }} onClick={handleAnchorClick}>
+      <Link to={ROUTES.demo} className="btn-primary btn-full" style={{ marginTop: 20 }}>
         Book a demo
-      </a>
+      </Link>
     </div>
   )
 }
 
 export default function LiveDemo() {
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const href = e.currentTarget.getAttribute('href')
-    if (!href) return
-    const target = document.querySelector(href)
-    if (!target) return
-    e.preventDefault()
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' })
-  }
-
   return (
     <section className="live-demo-section" id="live-demo">
       <div className="container">
@@ -163,9 +147,9 @@ export default function LiveDemo() {
                 <div><strong>Revenue recovery</strong><span>Turn missed calls into direct bookings</span></div>
               </li>
             </ul>
-            <a href="#demo" className="btn-primary btn-lg" style={{ marginTop: 8 }} onClick={handleAnchorClick}>
+            <Link to={ROUTES.demo} className="btn-primary btn-lg" style={{ marginTop: 8 }}>
               Book a Demo
-            </a>
+            </Link>
           </div>
           <div className="live-demo-player fade-up">
             <AudioPlayer />

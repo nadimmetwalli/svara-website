@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom'
+import { ROUTES } from '../routes'
+
 interface Card {
   icon: React.ReactNode
   title: string
@@ -45,15 +48,6 @@ const CARDS: Card[] = [
 ]
 
 export default function FoundingHotels() {
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const href = e.currentTarget.getAttribute('href')
-    if (!href) return
-    const target = document.querySelector(href)
-    if (!target) return
-    e.preventDefault()
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' })
-  }
-
   return (
     <section className="founding-section" id="testimonials">
       <div className="container">
@@ -80,9 +74,9 @@ export default function FoundingHotels() {
           </div>
 
           <div className="founding-cta">
-            <a href="#demo" className="btn-primary btn-lg" onClick={handleAnchorClick}>
+            <Link to={ROUTES.demo} className="btn-primary btn-lg">
               Apply for early access →
-            </a>
+            </Link>
             <p className="founding-note">No commitment required · We respond within one business day</p>
           </div>
         </div>

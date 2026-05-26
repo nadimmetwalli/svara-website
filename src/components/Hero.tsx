@@ -1,14 +1,7 @@
-export default function Hero() {
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const href = e.currentTarget.getAttribute('href')
-    if (!href || href === '#') return
-    const target = document.querySelector(href)
-    if (!target) return
-    e.preventDefault()
-    const top = target.getBoundingClientRect().top + window.scrollY - 72
-    window.scrollTo({ top, behavior: 'smooth' })
-  }
+import { Link } from 'react-router-dom'
+import { ROUTES } from '../routes'
 
+export default function Hero() {
   return (
     <section className="hero" id="home">
       <div className="hero-bg">
@@ -38,10 +31,10 @@ export default function Hero() {
             </p>
           </div>
           <div className="hero-bottom-right">
-            <a href="#demo" className="hero-demo-btn" onClick={handleAnchorClick}>
+            <Link to={ROUTES.product} className="hero-demo-btn">
               <span>Hear It Live</span>
               <div className="demo-orb" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

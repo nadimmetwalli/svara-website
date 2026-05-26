@@ -1,44 +1,38 @@
+import { Link } from 'react-router-dom'
 import logoSvg from '../assets/logo.svg'
+import { ROUTES } from '../routes'
 
 const PRODUCT_LINKS = [
-  { href: '#features', label: 'Features' },
-  { href: '#integrations', label: 'Integrations' },
-  { href: '#how-it-works', label: 'How It Works' },
-  { href: '#faq', label: 'FAQ' },
+  { to: ROUTES.product, label: 'Features' },
+  { to: ROUTES.integrations, label: 'Integrations' },
+  { to: ROUTES.howItWorks, label: 'How It Works' },
+  { to: ROUTES.pricing, label: 'Pricing' },
+  { to: ROUTES.faq, label: 'FAQ' },
 ]
 
 const EARLY_ACCESS_LINKS = [
-  { href: '#testimonials', label: 'Founding Hotels' },
-  { href: '#demo', label: 'Book a Demo' },
-  { href: '#demo', label: 'Contact Sales' },
+  { to: ROUTES.earlyAccess, label: 'Founding Hotels' },
+  { to: ROUTES.demo, label: 'Book a Demo' },
+  { to: ROUTES.demo, label: 'Contact Sales' },
 ]
 
 const COMPANY_LINKS = [
   { href: 'https://www.linkedin.com/company/ai-svara/', label: 'LinkedIn', external: true },
-  { href: '#demo', label: 'Contact' },
+  { to: ROUTES.demo, label: 'Contact' },
 ]
 
 export default function Footer() {
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const href = e.currentTarget.getAttribute('href')
-    if (!href || href.startsWith('http')) return
-    const target = document.querySelector(href)
-    if (!target) return
-    e.preventDefault()
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' })
-  }
-
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <a href="/" className="nav-logo footer-logo">
+            <Link to={ROUTES.home} className="nav-logo footer-logo">
               <div className="logo-mark">
                 <img src={logoSvg} alt="SVARA" width={18} height={18} />
               </div>
               <span>SVARA</span>
-            </a>
+            </Link>
             <p className="footer-tagline">The AI voice concierge built for hospitality.</p>
             <div className="footer-socials">
               <a href="https://www.linkedin.com/company/ai-svara/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -53,8 +47,8 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Product</h4>
             <ul>
-              {PRODUCT_LINKS.map(({ href, label }) => (
-                <li key={label}><a href={href} onClick={handleAnchorClick}>{label}</a></li>
+              {PRODUCT_LINKS.map(({ to, label }) => (
+                <li key={label}><Link to={to}>{label}</Link></li>
               ))}
             </ul>
           </div>
@@ -62,8 +56,8 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Early Access</h4>
             <ul>
-              {EARLY_ACCESS_LINKS.map(({ href, label }) => (
-                <li key={label}><a href={href} onClick={handleAnchorClick}>{label}</a></li>
+              {EARLY_ACCESS_LINKS.map(({ to, label }) => (
+                <li key={label}><Link to={to}>{label}</Link></li>
               ))}
             </ul>
           </div>
@@ -71,11 +65,13 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Company</h4>
             <ul>
-              {COMPANY_LINKS.map(({ href, label, external }) => (
+              {COMPANY_LINKS.map(({ href, to, label, external }) => (
                 <li key={label}>
-                  <a href={href} onClick={handleAnchorClick} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-                    {label}
-                  </a>
+                  {external ? (
+                    <a href={href} target="_blank" rel="noopener noreferrer">{label}</a>
+                  ) : (
+                    <Link to={to!}>{label}</Link>
+                  )}
                 </li>
               ))}
             </ul>
