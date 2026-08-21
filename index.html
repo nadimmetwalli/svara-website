@@ -5,8 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SVARA — AI Voice Concierge for Hotels</title>
   <meta name="description" content="SVARA is the AI voice concierge built for hotels. Answer every guest call, handle bookings automatically, and deliver five-star service 24/7 in any language." />
-  <link rel="icon" href="SVARA AI LOGO (8).png" type="image/png" />
-  <link rel="apple-touch-icon" href="SVARA AI LOGO (8).png" />
+  <link rel="canonical" href="https://svara-ai.com/" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="SVARA AI" />
+  <meta name="theme-color" content="#f5f5f8" />
+
+  <!-- Social sharing (Open Graph) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SVARA AI" />
+  <meta property="og:url" content="https://svara-ai.com/" />
+  <meta property="og:title" content="SVARA — AI Voice Concierge for Hotels" />
+  <meta property="og:description" content="The first multilingual AI voice agent that sounds like your best employee — answering every guest call, in any language, 24/7." />
+  <meta property="og:locale" content="en_US" />
+  <!-- TODO: add og:image once a 1200x630 share image exists, e.g.
+  <meta property="og:image" content="https://svara-ai.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="SVARA AI voice concierge for hotels" />
+  <meta name="twitter:image" content="https://svara-ai.com/og-image.png" />
+  and switch twitter:card below to "summary_large_image" -->
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="SVARA — AI Voice Concierge for Hotels" />
+  <meta name="twitter:description" content="The first multilingual AI voice agent that sounds like your best employee — answering every guest call, in any language, 24/7." />
+
+  <link rel="icon" href="/svara-icon-512.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/svara-icon-512.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
@@ -793,5 +817,109 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <!-- ── STRUCTURED DATA ─────────────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://svara-ai.com/#organization",
+        "name": "SVARA AI",
+        "url": "https://svara-ai.com/",
+        "logo": "https://svara-ai.com/logo.svg",
+        "email": "info@svara-ai.com",
+        "description": "AI voice concierge for hotels. Answers every guest call in 20+ languages, 24/7, with direct PMS integration.",
+        "sameAs": ["https://www.linkedin.com/company/ai-svara/"],
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "EE"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://svara-ai.com/#website",
+        "url": "https://svara-ai.com/",
+        "name": "SVARA AI",
+        "publisher": { "@id": "https://svara-ai.com/#organization" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "SVARA",
+        "applicationCategory": "BusinessApplication",
+        "applicationSubCategory": "Hospitality voice AI",
+        "operatingSystem": "Cloud-based",
+        "url": "https://svara-ai.com/",
+        "publisher": { "@id": "https://svara-ai.com/#organization" },
+        "featureList": [
+          "24/7 AI call answering",
+          "Multilingual voice support in 20+ languages with automatic language detection",
+          "Direct PMS integration with Opera, Mews and Cloudbeds",
+          "Automated room booking during the call",
+          "Smart upselling of upgrades and late check-out",
+          "Call analytics dashboard"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does SVARA AI integrate with my existing booking system?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SVARA connects via API to all major PMS platforms including Opera, Mews, Cloudbeds, and more. Setup takes under 48 hours with no hardware changes required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will the AI sound 'robotic' or frustrate my international guests?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. SVARA uses advanced neural voice synthesis that sounds natural and warm. Many guests don't realise they're speaking to an AI — and that's intentional."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does SVARA replace my front-desk team?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SVARA handles routine calls so your team can focus on high-value, in-person guest experiences. It's a force multiplier, not a replacement."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you ensure the security of our guests' private data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "All data is encrypted in transit and at rest. We are GDPR compliant and never sell or share guest data. You retain full ownership of all conversation records."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can SVARA handle multiple languages?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — SVARA supports 20+ languages and detects the caller's language automatically, responding in kind without any manual configuration."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will I be able to see a report of how SVARA AI is doing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. Your live dashboard shows all calls, bookings, sentiment scores, revenue attributed, and peak-time analytics — updated in real time."
+        }
+      }
+    ]
+  }
+  </script>
 </body>
 </html>
