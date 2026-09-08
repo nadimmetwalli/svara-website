@@ -13,6 +13,7 @@ import DemoForm from './components/DemoForm'
 import FAQ from './components/FAQ'
 import CTABanner from './components/CTABanner'
 import Footer from './components/Footer'
+import { LanguageProvider } from './contexts/LanguageProvider'
 
 export default function App() {
   useEffect(() => {
@@ -32,7 +33,7 @@ export default function App() {
   }, [])
 
   return (
-    <>
+    <LanguageProvider>
       <Navbar />
       <Hero />
       <Marquee />
@@ -47,6 +48,6 @@ export default function App() {
       <FAQ />
       <CTABanner />
       <Footer />
-    </>
+    </LanguageProvider>
   )
 }

@@ -1,42 +1,30 @@
-const BEFORE = [
-  'Misses calls during peak hours',
-  'Limited to business hours only',
-  'Language barriers with guests',
-  'Manual, error-prone booking process',
-  'No analytics or call insights',
-  "High staffing costs that don't scale",
-]
+import { useT } from '../hooks/useT'
+import type { TranslationKey } from '../i18n'
 
-const AFTER = [
-  'Answers every call, instantly',
-  'Available 24 hours, 7 days a week',
-  'Speaks 20+ languages natively',
-  'Books rooms automatically during the call',
-  'Full analytics on every interaction',
-  'Fixed cost, scales to any volume',
-]
+const BEFORE: TranslationKey[] = ['cmp.old1', 'cmp.old2', 'cmp.old3', 'cmp.old4', 'cmp.old5', 'cmp.old6']
+const AFTER: TranslationKey[] = ['cmp.new1', 'cmp.new2', 'cmp.new3', 'cmp.new4', 'cmp.new5', 'cmp.new6']
 
 export default function Comparison() {
+  const { t } = useT()
+
   return (
     <section className="comparison-section">
       <div className="container">
-        <div className="section-tag">Why SVARA</div>
-        <h2 className="section-h2">The smarter way to handle guest calls</h2>
-        <p className="section-sub">
-          Traditional front desks miss calls, lose bookings, and struggle with language barriers. SVARA fixes all of that — permanently.
-        </p>
+        <div className="section-tag">{t('cmp.tag')}</div>
+        <h2 className="section-h2">{t('cmp.title')}</h2>
+        <p className="section-sub">{t('cmp.sub')}</p>
 
         <div className="cmp-grid">
           <div className="cmp-col cmp-old fade-up">
             <div className="cmp-header">
-              <span className="cmp-tag cmp-tag-old">Before SVARA</span>
-              <h3>Traditional Reception</h3>
+              <span className="cmp-tag cmp-tag-old">{t('cmp.before')}</span>
+              <h3>{t('cmp.oldTitle')}</h3>
             </div>
             <ul className="cmp-list">
-              {BEFORE.map((item) => (
-                <li key={item} className="cmp-bad">
+              {BEFORE.map((key) => (
+                <li key={key} className="cmp-bad">
                   <span className="cmp-icon">✕</span>
-                  {item}
+                  {t(key)}
                 </li>
               ))}
             </ul>
@@ -44,14 +32,14 @@ export default function Comparison() {
 
           <div className="cmp-col cmp-new fade-up">
             <div className="cmp-header">
-              <span className="cmp-tag cmp-tag-new">With SVARA</span>
-              <h3>AI Voice Concierge</h3>
+              <span className="cmp-tag cmp-tag-new">{t('cmp.with')}</span>
+              <h3>{t('cmp.newTitle')}</h3>
             </div>
             <ul className="cmp-list">
-              {AFTER.map((item) => (
-                <li key={item} className="cmp-good">
+              {AFTER.map((key) => (
+                <li key={key} className="cmp-good">
                   <span className="cmp-icon">✓</span>
-                  {item}
+                  {t(key)}
                 </li>
               ))}
             </ul>
