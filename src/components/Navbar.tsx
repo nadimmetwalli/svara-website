@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react'
 import logoSvg from '../assets/logo.svg'
+import { useT } from '../hooks/useT'
+import type { TranslationKey } from '../i18n'
+import LanguageSwitch from './LanguageSwitch'
 
-const NAV_LINKS = [
-  { href: '#features', label: 'Product' },
-  { href: '#how-it-works', label: 'How It Works' },
-  { href: '#testimonials', label: 'Early Access' },
-  { href: '#integrations', label: 'Integrations' },
-  { href: '#faq', label: 'FAQ' },
+const NAV_LINKS: { href: string; key: TranslationKey }[] = [
+  { href: '#features', key: 'nav.product' },
+  { href: '#how-it-works', key: 'nav.how' },
+  { href: '#testimonials', key: 'nav.earlyAccess' },
+  { href: '#integrations', key: 'nav.integrations' },
+  { href: '#faq', key: 'nav.faq' },
 ]
 
 export default function Navbar() {
+  const { t } = useT()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -40,22 +44,23 @@ export default function Navbar() {
         </a>
 
         <ul className="nav-links">
-          {NAV_LINKS.map(({ href, label }) => (
+          {NAV_LINKS.map(({ href, key }) => (
             <li key={href}>
-              <a href={href} onClick={(e) => handleAnchorClick(e, href)}>{label}</a>
+              <a href={href} onClick={(e) => handleAnchorClick(e, href)}>{t(key)}</a>
             </li>
           ))}
         </ul>
 
         <div className="nav-cta">
-          <a href="#demo" className="btn-ghost" onClick={(e) => handleAnchorClick(e, '#demo')}>Contact Sales</a>
-          <a href="#demo" className="btn-primary nav-btn" onClick={(e) => handleAnchorClick(e, '#demo')}>Book a Demo</a>
+          <LanguageSwitch />
+          <a href="#demo" className="btn-ghost" onClick={(e) => handleAnchorClick(e, '#demo')}>{t('nav.contactSales')}</a>
+          <a href="#demo" className="btn-primary nav-btn" onClick={(e) => handleAnchorClick(e, '#demo')}>{t('nav.bookDemo')}</a>
         </div>
 
         <button
           className="hamburger"
           id="hamburger"
-          aria-label="Menu"
+          aria-label={t('nav.menu')}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((o) => !o)}
         >
@@ -65,15 +70,16 @@ export default function Navbar() {
 
       <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
         <ul>
-          {NAV_LINKS.map(({ href, label }) => (
+          {NAV_LINKS.map(({ href, key }) => (
             <li key={href}>
-              <a href={href} onClick={(e) => handleAnchorClick(e, href)}>{label}</a>
+              <a href={href} onClick={(e) => handleAnchorClick(e, href)}>{t(key)}</a>
             </li>
           ))}
         </ul>
         <div className="mobile-cta">
-          <a href="#demo" className="btn-ghost-full" onClick={(e) => handleAnchorClick(e, '#demo')}>Contact Sales</a>
-          <a href="#demo" className="btn-primary btn-full" onClick={(e) => handleAnchorClick(e, '#demo')}>Book a Demo</a>
+          <LanguageSwitch />
+          <a href="#demo" className="btn-ghost-full" onClick={(e) => handleAnchorClick(e, '#demo')}>{t('nav.contactSales')}</a>
+          <a href="#demo" className="btn-primary btn-full" onClick={(e) => handleAnchorClick(e, '#demo')}>{t('nav.bookDemo')}</a>
         </div>
       </div>
     </nav>

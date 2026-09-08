@@ -1,24 +1,36 @@
 import logoSvg from '../assets/logo.svg'
+import { useT } from '../hooks/useT'
+import type { TranslationKey } from '../i18n'
 
-const PRODUCT_LINKS = [
-  { href: '#features', label: 'Features' },
-  { href: '#integrations', label: 'Integrations' },
-  { href: '#how-it-works', label: 'How It Works' },
-  { href: '#faq', label: 'FAQ' },
+interface FooterLink {
+  href: string
+  key: TranslationKey
+  external?: boolean
+  label?: string
+}
+
+const PRODUCT_LINKS: FooterLink[] = [
+  { href: '#features', key: 'footer.features' },
+  { href: '#integrations', key: 'nav.integrations' },
+  { href: '#how-it-works', key: 'nav.how' },
+  { href: '#faq', key: 'nav.faq' },
 ]
 
-const EARLY_ACCESS_LINKS = [
-  { href: '#testimonials', label: 'Founding Hotels' },
-  { href: '#demo', label: 'Book a Demo' },
-  { href: '#demo', label: 'Contact Sales' },
+const EARLY_ACCESS_LINKS: FooterLink[] = [
+  { href: '#testimonials', key: 'footer.founding' },
+  { href: '#demo', key: 'nav.bookDemo' },
+  { href: '#demo', key: 'nav.contactSales' },
 ]
 
-const COMPANY_LINKS = [
-  { href: 'https://www.linkedin.com/company/ai-svara/', label: 'LinkedIn', external: true },
-  { href: '#demo', label: 'Contact' },
+const COMPANY_LINKS: FooterLink[] = [
+  // LinkedIn is a brand name — it stays untranslated in both languages.
+  { href: 'https://www.linkedin.com/company/ai-svara/', key: 'footer.company', label: 'LinkedIn', external: true },
+  { href: '#demo', key: 'footer.contact' },
 ]
 
 export default function Footer() {
+  const { t } = useT()
+
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const href = e.currentTarget.getAttribute('href')
     if (!href || href.startsWith('http')) return
@@ -27,6 +39,15 @@ export default function Footer() {
     e.preventDefault()
     window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' })
   }
+
+  const renderLinks = (links: FooterLink[]) =>
+    links.map(({ href, key, external, label }) => (
+      <li key={label ?? key}>
+        <a href={href} onClick={handleAnchorClick} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+          {label ?? t(key)}
+        </a>
+      </li>
+    ))
 
   return (
     <footer className="footer">
@@ -39,7 +60,7 @@ export default function Footer() {
               </div>
               <span>SVARA</span>
             </a>
-            <p className="footer-tagline">The AI voice concierge built for hospitality.</p>
+            <p className="footer-tagline">{t('footer.tagline')}</p>
             <div className="footer-socials">
               <a href="https://www.linkedin.com/company/ai-svara/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <svg width={18} height={18} viewBox="0 0 24 24" fill="currentColor">
@@ -51,39 +72,23 @@ export default function Footer() {
           </div>
 
           <div className="footer-col">
-            <h4>Product</h4>
-            <ul>
-              {PRODUCT_LINKS.map(({ href, label }) => (
-                <li key={label}><a href={href} onClick={handleAnchorClick}>{label}</a></li>
-              ))}
-            </ul>
+            <h4>{t('footer.product')}</h4>
+            <ul>{renderLinks(PRODUCT_LINKS)}</ul>
           </div>
 
           <div className="footer-col">
-            <h4>Early Access</h4>
-            <ul>
-              {EARLY_ACCESS_LINKS.map(({ href, label }) => (
-                <li key={label}><a href={href} onClick={handleAnchorClick}>{label}</a></li>
-              ))}
-            </ul>
+            <h4>{t('footer.early')}</h4>
+            <ul>{renderLinks(EARLY_ACCESS_LINKS)}</ul>
           </div>
 
           <div className="footer-col">
-            <h4>Company</h4>
-            <ul>
-              {COMPANY_LINKS.map(({ href, label, external }) => (
-                <li key={label}>
-                  <a href={href} onClick={handleAnchorClick} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <h4>{t('footer.company')}</h4>
+            <ul>{renderLinks(COMPANY_LINKS)}</ul>
           </div>
         </div>
 
         <div className="footer-legal">
-          <p>SVARA TECHNOLOGIES OÜ · Registry code: 17453177 · Harju maakond, Tallinn, Kesklinna linnaosa, Narva mnt 2-62, 10117, Estonia</p>
+          <p>{t('footer.legal')}</p>
           <p>
             <a href="mailto:info@svara-ai.com">info@svara-ai.com</a>
             {' · '}
@@ -92,8 +97,8 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>© 2026 SVARA TECHNOLOGIES OÜ. All rights reserved.</p>
-          <p>Built for hospitality. Powered by AI.</p>
+          <p>{t('footer.rights')}</p>
+          <p>{t('footer.builtFor')}</p>
         </div>
       </div>
     </footer>

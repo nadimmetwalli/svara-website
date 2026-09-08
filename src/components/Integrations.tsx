@@ -1,4 +1,5 @@
 import logoSvg from '../assets/logo.svg'
+import { useT } from '../hooks/useT'
 import twilioImg from '../assets/twlio.png'
 import operaImg from '../assets/oracle-opera-pms-logo.png'
 import openaiImg from '../assets/open-ai-logo-png_seeklogo-428036.png'
@@ -43,12 +44,14 @@ function LogoStrip({ logos, className }: { logos: LogoCard[]; className: string 
 }
 
 export default function Integrations() {
+  const { t } = useT()
+
   return (
     <section className="integrations-section" id="integrations">
       <div className="container">
-        <div className="section-tag">Integrations</div>
-        <h2 className="section-h2">Connects with your existing stack</h2>
-        <p className="section-sub">SVARA works with the tools your hotel already uses — no rip-and-replace required.</p>
+        <div className="section-tag">{t('int.tag')}</div>
+        <h2 className="section-h2">{t('int.title')}</h2>
+        <p className="section-sub">{t('int.sub')}</p>
       </div>
 
       <div className="int-orbit-wrap">

@@ -1,25 +1,30 @@
-const LANGUAGES = [
-  'English','Finnish','Estonian','Swedish','Norwegian','German','French',
-  'Spanish','Portuguese','Italian','Dutch','Polish','Russian','Japanese',
-  'Mandarin','Arabic','Korean','Turkish','Hindi','Greek',
+import { useT } from '../hooks/useT'
+import type { TranslationKey } from '../i18n'
+
+const LANGUAGES: TranslationKey[] = [
+  'lang.english', 'lang.finnish', 'lang.estonian', 'lang.swedish', 'lang.norwegian',
+  'lang.german', 'lang.french', 'lang.spanish', 'lang.portuguese', 'lang.italian',
+  'lang.dutch', 'lang.polish', 'lang.russian', 'lang.japanese', 'lang.mandarin',
+  'lang.arabic', 'lang.korean', 'lang.turkish', 'lang.hindi', 'lang.greek',
 ]
 
-const PROPERTY_TYPES = [
-  'Boutique Hotels','Restaurants','City Hotels','Spa & Wellness','Spa Resorts',
-  'Airport Hotels','Luxury Resorts','Vacation Rentals','Bed & Breakfasts',
-  'Serviced Apartments','Hostels','Conference Hotels','Eco Lodges',
-  'Golf Resorts','Design Hotels','Heritage Properties',
+const PROPERTY_TYPES: TranslationKey[] = [
+  'prop.boutique', 'prop.restaurants', 'prop.city', 'prop.spa', 'prop.spaResorts',
+  'prop.airport', 'prop.luxury', 'prop.vacation', 'prop.bnb', 'prop.serviced',
+  'prop.hostels', 'prop.conference', 'prop.eco', 'prop.golf', 'prop.design',
+  'prop.heritage',
 ]
 
-function MarqueeRow({ items, reverse = false }: { items: string[]; reverse?: boolean }) {
+function MarqueeRow({ items, reverse = false }: { items: TranslationKey[]; reverse?: boolean }) {
+  const { t } = useT()
   const doubled = [...items, ...items]
   return (
     <div className="marquee-track">
       <div className={`marquee-inner${reverse ? ' marquee-inner-reverse' : ''}`}>
-        {doubled.map((item, i) => (
+        {doubled.map((key, i) => (
           <span key={i}>
             {i > 0 && <span className="mq-sep"> · </span>}
-            {item}
+            {t(key)}
           </span>
         ))}
       </div>
@@ -28,11 +33,12 @@ function MarqueeRow({ items, reverse = false }: { items: string[]; reverse?: boo
 }
 
 export default function Marquee() {
+  const { t } = useT()
   return (
     <section className="marquee-section">
-      <p className="marquee-label">Speaks your guests' language natively</p>
+      <p className="marquee-label">{t('marquee.languages')}</p>
       <MarqueeRow items={LANGUAGES} />
-      <p className="marquee-label marquee-label-2">Built for every property type</p>
+      <p className="marquee-label marquee-label-2">{t('marquee.properties')}</p>
       <MarqueeRow items={PROPERTY_TYPES} reverse />
     </section>
   )

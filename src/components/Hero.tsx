@@ -1,4 +1,8 @@
+import { useT } from '../hooks/useT'
+
 export default function Hero() {
+  const { t } = useT()
+
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const href = e.currentTarget.getAttribute('href')
     if (!href || href === '#') return
@@ -19,9 +23,9 @@ export default function Hero() {
       </div>
 
       <div className="hero-center">
-        <p className="hero-eyebrow">AI powered voice intelligence for modern hospitality operations</p>
+        <p className="hero-eyebrow">{t('hero.eyebrow')}</p>
         <h1 className="hero-h1">
-          The voice your<br />guests remember,<br /><em>in every language.</em>
+          {t('hero.title1')}<br />{t('hero.title2')}<br /><em>{t('hero.title3')}</em>
         </h1>
       </div>
 
@@ -33,13 +37,11 @@ export default function Hero() {
               <span className="rating-score">4.8</span>
               <span className="rating-source">Prototron</span>
             </div>
-            <p className="hero-bottom-desc">
-              The first multilingual AI voice agent that sounds like your best employee — answering every call, in any language, 24/7.
-            </p>
+            <p className="hero-bottom-desc">{t('hero.desc')}</p>
           </div>
           <div className="hero-bottom-right">
             <a href="#demo" className="hero-demo-btn" onClick={handleAnchorClick}>
-              <span>Hear It Live</span>
+              <span>{t('hero.listen')}</span>
               <div className="demo-orb" />
             </a>
           </div>

@@ -1,38 +1,18 @@
 import { useState } from 'react'
+import { useT } from '../hooks/useT'
+import type { TranslationKey } from '../i18n'
 
-interface FAQItem {
-  q: string
-  a: string
-}
-
-const FAQS: FAQItem[] = [
-  {
-    q: 'How does SVARA AI integrate with my existing booking system?',
-    a: 'SVARA connects via API to all major PMS platforms including Opera, Mews, Cloudbeds, and more. Setup takes under 48 hours with no hardware changes required.',
-  },
-  {
-    q: "Will the AI sound 'robotic' or frustrate my international guests?",
-    a: "No. SVARA uses advanced neural voice synthesis that sounds natural and warm. Many guests don't realise they're speaking to an AI — and that's intentional.",
-  },
-  {
-    q: 'Does SVARA replace my front-desk team?',
-    a: 'SVARA handles routine calls so your team can focus on high-value, in-person guest experiences. It\'s a force multiplier, not a replacement.',
-  },
-  {
-    q: "How do you ensure the security of our guests' private data?",
-    a: 'All data is encrypted in transit and at rest. We are GDPR compliant and never sell or share guest data. You retain full ownership of all conversation records.',
-  },
-  {
-    q: 'Can SVARA handle multiple languages?',
-    a: 'Yes — SVARA supports 20+ languages and detects the caller\'s language automatically, responding in kind without any manual configuration.',
-  },
-  {
-    q: 'Will I be able to see a report of how SVARA AI is doing?',
-    a: 'Absolutely. Your live dashboard shows all calls, bookings, sentiment scores, revenue attributed, and peak-time analytics — updated in real time.',
-  },
+const FAQS: { q: TranslationKey; a: TranslationKey }[] = [
+  { q: 'faq.q1', a: 'faq.a1' },
+  { q: 'faq.q2', a: 'faq.a2' },
+  { q: 'faq.q3', a: 'faq.a3' },
+  { q: 'faq.q4', a: 'faq.a4' },
+  { q: 'faq.q5', a: 'faq.a5' },
+  { q: 'faq.q6', a: 'faq.a6' },
 ]
 
 export default function FAQ() {
+  const { t } = useT()
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -49,29 +29,30 @@ export default function FAQ() {
       <div className="container">
         <div className="faq-grid">
           <div className="faq-left">
-            <div className="section-tag">FAQ</div>
-            <h2 className="section-h2">Frequently Asked Questions</h2>
-            <p className="section-sub">Still have questions? We've answered some of the most common queries below to help you make an informed decision.</p>
+            <div className="section-tag">{t('faq.tag')}</div>
+            <h2 className="section-h2">{t('faq.title')}</h2>
+            <p className="section-sub">{t('faq.sub')}</p>
             <div className="faq-still">
-              <p><strong>Still have questions?</strong></p>
-              <p>Get in touch now and we can help you with all your queries right away.</p>
+              <p><strong>{t('faq.stillQ')}</strong></p>
+              <p>{t('faq.stillA')}</p>
               <a href="#demo" className="btn-primary" style={{ marginTop: 16 }} onClick={handleAnchorClick}>
-                Book a Demo →
+                {t('faq.stillCta')}
               </a>
             </div>
           </div>
 
           <div className="faq-right">
             {FAQS.map((item, i) => (
-              <div key={i} className={`faq-item${openIndex === i ? ' open' : ''}`}>
+              <div key={item.q} className={`faq-item${openIndex === i ? ' open' : ''}`}>
                 <button
                   className="faq-q"
+                  aria-expanded={openIndex === i}
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 >
-                  {item.q}
+                  {t(item.q)}
                   <span className="faq-arrow">↓</span>
                 </button>
-                <div className="faq-a">{item.a}</div>
+                <div className="faq-a">{t(item.a)}</div>
               </div>
             ))}
           </div>
