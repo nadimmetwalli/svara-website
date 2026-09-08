@@ -19,9 +19,9 @@ export const DEFAULT_LANG: Lang = 'et'
 export const STORAGE_KEY = 'svara-lang'
 
 const et = {
-  'meta.title': 'SVARA — AI häälkonsjerž hotellidele',
+  'meta.title': 'SVARA — AI häälassistent hotellidele',
   'meta.description':
-    'SVARA on hotellidele loodud AI häälkonsjerž. Vasta igale külalise kõnele, võta broneeringud vastu automaatselt ja paku viietärniteenindust 24/7 igas keeles.',
+    'SVARA on hotellidele loodud AI häälassistent. Vasta igale külalise kõnele, võta broneeringud vastu automaatselt ja paku viietärniteenindust 24/7 igas keeles.',
   'meta.ogDescription':
     'Esimene mitmekeelne AI häälagent, mis kõlab nagu sinu parim töötaja — vastab igale kõnele, igas keeles, ööpäev läbi.',
   'meta.ogLocale': 'et_EE',
@@ -112,7 +112,7 @@ const et = {
   'cmp.old5': 'Puudub analüütika ja ülevaade kõnedest',
   'cmp.old6': 'Kõrged tööjõukulud, mis ei skaleeru',
   'cmp.with': 'SVARAga',
-  'cmp.newTitle': 'AI häälkonsjerž',
+  'cmp.newTitle': 'AI häälassistent',
   'cmp.new1': 'Vastab igale kõnele koheselt',
   'cmp.new2': 'Saadaval 24 tundi, 7 päeva nädalas',
   'cmp.new3': 'Räägib emakeelena 20+ keelt',
@@ -133,7 +133,7 @@ const et = {
   'live.f4.title': 'Taastatud tulu',
   'live.f4.desc': 'Muuda vastamata kõned otsebroneeringuteks',
   'live.playerHeader': 'Kuula SVARAt töös',
-  'live.playerLabel': 'Päris kõnesalvestis · SVARA AI konsjerž',
+  'live.playerLabel': 'Päris kõnesalvestis · SVARA AI assistent',
   'live.playAria': 'Esita salvestis',
   'live.pauseAria': 'Peata salvestis',
   'live.progressAria': 'Esituse edenemine',
@@ -144,7 +144,7 @@ const et = {
   'feat.sub': 'Alati kohal. Ei väsi kunagi. Laitmatult koolitatud. Ei jää kunagi haigeks.',
   'feat.f1.title': '24/7 kõnedele vastamine',
   'feat.f1.desc':
-    'Ükski kõne ei jää vastamata, ka tipptundidel või keset ööd. Sinu AI konsjerž vastab koheselt, iga kord, ka pühade ajal.',
+    'Ükski kõne ei jää vastamata, ka tipptundidel või keset ööd. Sinu AI assistent vastab koheselt, iga kord, ka pühade ajal.',
   'feat.f2.title': 'PMS-integratsioon',
   'feat.f2.desc':
     'Broneeringud ja külaliste andmed liiguvad otse sinu majutuse haldussüsteemi täieliku täpsusega — ilma käsitsi sisestamise, vigade ja viivitusteta.',
@@ -174,7 +174,7 @@ const et = {
     'Suuna oma telefoniliin SVARA numbrile, kui oled eemal või tipptunni ajal. Sinu senine number jääb alles — SVARA hoolitseb ülejäänu eest taustal.',
   'how.s2.title': 'Vestlus',
   'how.s2.desc':
-    'Külalised saavad vastused kohe. SVARA leiab vabad toad, vastab küsimustele mugavuste kohta, võtab vastu broneeringuid ja lahendab konsjeržipäringuid — loomulikult ja professionaalselt igas keeles.',
+    'Külalised saavad vastused kohe. SVARA leiab vabad toad, vastab küsimustele mugavuste kohta, võtab vastu broneeringuid ja lahendab külaliste erisoove — loomulikult ja professionaalselt igas keeles.',
   'how.s3.title': 'Sujuv PMS-integratsioon',
   'how.s3.desc':
     'Broneeringud ja külaliste andmed liiguvad otse sinu majutuse haldussüsteemi (Opera, Mews, Cloudbeds jt). Iga suhtlus salvestatakse ja sünkroonitakse — ilma käsitsi sisestamise ja vigadeta.',
@@ -196,7 +196,7 @@ const et = {
     'Otsene ligipääs meie tiimile. Sinu igapäevased vajadused ja tagasiside määravad, mida me järgmisena ehitame.',
   'found.c4.title': 'Esimese eelis',
   'found.c4.desc':
-    'Paista silma enne, kui AI häälkonsjerž muutub standardiks. Külalised märkavad — ja mäletavad — hotelle, kes olid esimesed.',
+    'Paista silma enne, kui AI häälassistent muutub standardiks. Külalised märkavad — ja mäletavad — hotelle, kes olid esimesed.',
   'found.cta': 'Kandideeri varajasele ligipääsule →',
   'found.note': 'Kohustusi ei kaasne · Vastame ühe tööpäeva jooksul',
 
@@ -211,7 +211,7 @@ const et = {
   'demo.title': 'Näe SVARAt töös',
   'demo.desc':
     'Broneeri 30-minutiline demo ja vaata täpselt, kuidas SVARA sinu hotellis töötaks. Ei mingeid kohustusi ega survet — ainult tulemused.',
-  'demo.b1': 'Otsedemo AI konsjeržist',
+  'demo.b1': 'Otsedemo AI assistendist',
   'demo.b2': 'Sinu majutusasutuse tüübile kohandatud seadistus',
   'demo.b3': 'Sinu kõnemahule vastav hinnastus',
   'demo.b4': 'Käivitu vähem kui 24 tunniga',
@@ -271,7 +271,7 @@ const et = {
     'Liitu hotellidega, kes juba kasutavad SVARAt, et pakkuda viietärniteenindust ööpäev läbi.',
 
   /* ── Footer ── */
-  'footer.tagline': 'AI häälkonsjerž, mis on loodud majutussektorile.',
+  'footer.tagline': 'AI häälassistent, mis on loodud majutussektorile.',
   'footer.product': 'Toode',
   'footer.features': 'Võimalused',
   'footer.early': 'Varajane ligipääs',
@@ -287,9 +287,9 @@ const et = {
 export type TranslationKey = keyof typeof et
 
 const en: Record<TranslationKey, string> = {
-  'meta.title': 'SVARA — AI Voice Concierge for Hotels',
+  'meta.title': 'SVARA — AI Voice Assistant for Hotels',
   'meta.description':
-    'SVARA is the AI voice concierge built for hotels. Answer every guest call, handle bookings automatically, and deliver five-star service 24/7 in any language.',
+    'SVARA is the AI voice assistant built for hotels. Answer every guest call, handle bookings automatically, and deliver five-star service 24/7 in any language.',
   'meta.ogDescription':
     'The first multilingual AI voice agent that sounds like your best employee — answering every call, in any language, 24/7.',
   'meta.ogLocale': 'en_US',
@@ -380,7 +380,7 @@ const en: Record<TranslationKey, string> = {
   'cmp.old5': 'No analytics or call insights',
   'cmp.old6': 'High staffing costs that don’t scale',
   'cmp.with': 'With SVARA',
-  'cmp.newTitle': 'AI Voice Concierge',
+  'cmp.newTitle': 'AI Voice Assistant',
   'cmp.new1': 'Answers every call, instantly',
   'cmp.new2': 'Available 24 hours, 7 days a week',
   'cmp.new3': 'Speaks 20+ languages natively',
@@ -401,7 +401,7 @@ const en: Record<TranslationKey, string> = {
   'live.f4.title': 'Revenue recovery',
   'live.f4.desc': 'Turn missed calls into direct bookings',
   'live.playerHeader': 'Hear SVARA in Action',
-  'live.playerLabel': 'Real call recording · SVARA AI concierge',
+  'live.playerLabel': 'Real call recording · SVARA AI assistant',
   'live.playAria': 'Play recording',
   'live.pauseAria': 'Pause recording',
   'live.progressAria': 'Playback progress',
@@ -412,7 +412,7 @@ const en: Record<TranslationKey, string> = {
   'feat.sub': 'Always on. Never tired. Perfectly trained. Never calls in sick.',
   'feat.f1.title': '24/7 Call Answering',
   'feat.f1.desc':
-    'Never miss a single call, even during peak hours or the middle of the night. Your AI concierge picks up instantly, every time, holidays included.',
+    'Never miss a single call, even during peak hours or the middle of the night. Your AI assistant picks up instantly, every time, holidays included.',
   'feat.f2.title': 'PMS Integration',
   'feat.f2.desc':
     'Reservations and guest data flow directly into your property management system with full accuracy — no manual re-entry, no errors, no delays.',
@@ -442,7 +442,7 @@ const en: Record<TranslationKey, string> = {
     'Simply set your phone line to forward to your unique SVARA number while you’re away or during peak rush hours. You keep your existing number — SVARA handles it all behind the scenes.',
   'how.s2.title': 'The Conversation',
   'how.s2.desc':
-    'Guests get answers instantly. SVARA navigates room availability, answers questions about amenities, handles booking requests, and manages concierge queries — naturally and professionally in any language.',
+    'Guests get answers instantly. SVARA navigates room availability, answers questions about amenities, handles bookings, and manages special guest requests — naturally and professionally in any language.',
   'how.s3.title': 'Seamless PMS Integration',
   'how.s3.desc':
     'Bookings and guest data flow directly into your property management system (Opera, Mews, Cloudbeds, and more). Every interaction is logged and synced — no manual entry, no errors.',
@@ -464,7 +464,7 @@ const en: Record<TranslationKey, string> = {
     'Direct access to our team. Your operational needs and feedback drive the features we build next.',
   'found.c4.title': 'First-mover advantage',
   'found.c4.desc':
-    'Stand out before AI voice concierge becomes standard. Guests notice — and remember — the hotels that led.',
+    'Stand out before AI voice assistants become standard. Guests notice — and remember — the hotels that led.',
   'found.cta': 'Apply for early access →',
   'found.note': 'No commitment required · We respond within one business day',
 
@@ -478,7 +478,7 @@ const en: Record<TranslationKey, string> = {
   'demo.title': 'See SVARA in action',
   'demo.desc':
     'Book a 30-minute demo and see exactly how SVARA would work for your hotel. No commitment, no pressure — just results.',
-  'demo.b1': 'Live demo of the AI concierge',
+  'demo.b1': 'Live demo of the AI assistant',
   'demo.b2': 'Setup tailored to your property type',
   'demo.b3': 'Pricing aligned to your call volume',
   'demo.b4': 'Go live in under 24 hours',
@@ -537,7 +537,7 @@ const en: Record<TranslationKey, string> = {
   'cta.desc': 'Join hotels already using SVARA to deliver five-star service around the clock.',
 
   /* ── Footer ── */
-  'footer.tagline': 'The AI voice concierge built for hospitality.',
+  'footer.tagline': 'The AI voice assistant built for hospitality.',
   'footer.product': 'Product',
   'footer.features': 'Features',
   'footer.early': 'Early Access',
