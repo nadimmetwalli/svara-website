@@ -86,8 +86,16 @@ export const CALLS: Call[] = [
    `audio`. The transcript shown is the translation in the page
    language (listen.sampleL1/L2). Languages come from the i18n
    `lang.*` names. */
-export type Sample = { code: string; audio?: string }
+export type Sample = { code: string; greeting: string; near: boolean; audio?: string }
 
-export const SAMPLES: Sample[] = [
-  'lv', 'lt', 'fi', 'sv', 'da', 'no', 'de', 'pl', 'es', 'it', 'pt', 'nl', 'el', 'tr', 'hi', 'zh', 'ja', 'ko',
-].map((code) => ({ code, audio: `/calls/samples/${code}.mp3` }))
+// [code, greeting in that language, Baltic/Nordic neighbour?]
+const SAMPLE_LANGS: [string, string, boolean][] = [
+  ['lv', 'Sveiki', true], ['lt', 'Labas', true], ['fi', 'Hei', true], ['sv', 'Hej', true], ['da', 'Hej', true], ['no', 'Hei', true],
+  ['de', 'Guten Tag', false], ['pl', 'Dzień dobry', false], ['es', 'Hola', false], ['it', 'Ciao', false], ['pt', 'Olá', false],
+  ['nl', 'Hallo', false], ['el', 'Γεια σας', false], ['tr', 'Merhaba', false], ['hi', 'नमस्ते', false], ['zh', '你好', false],
+  ['ja', 'こんにちは', false], ['ko', '안녕하세요', false],
+]
+
+export const SAMPLES: Sample[] = SAMPLE_LANGS.map(([code, greeting, near]) => ({
+  code, greeting, near, audio: `/calls/samples/${code}.mp3`,
+}))

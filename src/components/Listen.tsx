@@ -3,6 +3,7 @@ import { CALLS, SAMPLES, type CallLine } from '../content/calls'
 import { TRY_IT_HREF } from '../content/site'
 import { useT } from '../hooks/useT'
 import { fill, type TranslationKey } from '../i18n'
+import LanguagePicker from './LanguagePicker'
 import Link from './Link'
 
 /* "Kuula ise": pick a language, hear a call.
@@ -80,30 +81,25 @@ export default function Listen() {
           <p className="body-lg">{t('listen.sub')}</p>
         </div>
 
-        <div className="lang-pick" role="radiogroup" aria-label={t('listen.pick')}>
-          {CALLS.map((c) => (
-            <button
-              key={c.code}
-              type="button"
-              role="radio"
-              lang={c.code}
-              aria-checked={sel.kind === 'call' && sel.code === c.code}
-              onClick={() => choose({ kind: 'call', code: c.code })}
-            >
-              {c.label}
-            </button>
-          ))}
-          <label className="sr" htmlFor="other-lang">{t('listen.otherLabel')}</label>
-          <select
-            id="other-lang"
-            name="other-lang"
-            className={sel.kind === 'sample' ? 'on' : undefined}
-            value={sel.kind === 'sample' ? sel.code : ''}
-            onChange={(e) => { if (e.target.value) choose({ kind: 'sample', code: e.target.value }) }}
-          >
-            <option value="">{t('listen.other')}</option>
-            {SAMPLES.map((s) => <option key={s.code} value={s.code}>{t(`lang.${s.code}` as TranslationKey)}</option>)}
-          </select>
+        <div className="lang-pick">
+          <div role="radiogroup" aria-label={t('listen.pick')} className="lang-radios">
+            {CALLS.map((c) => (
+              <button
+                key={c.code}
+                type="button"
+                role="radio"
+                lang={c.code}
+                aria-checked={sel.kind === 'call' && sel.code === c.code}
+                onClick={() => choose({ kind: 'call', code: c.code })}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+          <LanguagePicker
+            selected={sel.kind === 'sample' ? sel.code : null}
+            onPick={(code) => choose({ kind: 'sample', code })}
+          />
         </div>
 
         <div className="player">

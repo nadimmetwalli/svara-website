@@ -181,9 +181,6 @@ p { margin: 0; text-wrap: pretty; }
 .lang-pick button:hover { background: rgba(255,255,255,.14); }
 .lang-pick button:active { transform: scale(.96); }
 .lang-pick button[aria-checked="true"] { background: var(--paper); color: var(--ink); }
-.lang-pick select { min-height: 40px; padding: 0 36px 0 18px; border: 0; border-radius: 980px; font: 400 15px var(--sans); cursor: pointer; appearance: none; -webkit-appearance: none; background-color: rgba(255,255,255,.08); color: var(--text); background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%); background-position: calc(100% - 20px) 17px, calc(100% - 15px) 17px; background-size: 5px 5px; background-repeat: no-repeat; }
-.lang-pick select.on { background-color: var(--paper); color: var(--ink); }
-.lang-pick select option { background-color: #16131f; color: #f5f5f7; }
 .player-meta .kind { display: inline-block; margin-left: 8px; padding: 2px 9px; border-radius: 980px; font-size: 12px; font-weight: 600; vertical-align: 2px; background: rgba(31,23,56,.08); color: var(--ink-2); }
 .player-meta .kind.full { background: rgba(23,122,76,.12); color: #177a4c; }
 .script li small { display: block; font-size: 12px; color: var(--ink-3); }
@@ -622,3 +619,31 @@ footer { background: #121019; color: var(--text-3); font-size: 12px; line-height
 .tagline { margin: 0 0 18px; font-size: clamp(16px, 1.3vw, 19px); font-weight: 500; letter-spacing: -.012em; line-height: 1.3;
   background: linear-gradient(90deg, #c9bcff, #f5f5f7 70%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 @media (min-width: 1200px) { .tagline { white-space: nowrap; } }
+
+/* "Muu keel…" popover (LanguagePicker.tsx) */
+.lang-radios { display: contents; }
+.lp { position: relative; }
+.lang-pick .lp-trigger { display: inline-flex; align-items: center; gap: 10px; padding: 0 16px 0 18px; }
+.lang-pick .lp-trigger.on { background: var(--paper); color: var(--ink); }
+.lp-chev { width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform .3s var(--ease); }
+.lp-trigger[aria-expanded="true"] .lp-chev { transform: translateY(2px) rotate(-135deg); }
+.lp-panel { position: absolute; z-index: 30; top: calc(100% + 10px); right: 0; width: 440px; padding: 16px; border-radius: 22px; text-align: left;
+  background: rgba(30, 25, 46, .88); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14), inset 0 0 0 1px rgba(255,255,255,.08), 0 40px 80px -30px rgba(0,0,0,.9);
+  transform-origin: top right; }
+@media (prefers-reduced-motion: no-preference) { .lp-panel { animation: lp-in .22s var(--ease) both; } }
+@keyframes lp-in { from { opacity: 0; transform: translateY(-6px) scale(.97); } to { opacity: 1; transform: none; } }
+.lp-group + .lp-group { margin-top: 14px; }
+.lp-h { margin: 2px 6px 8px; font-size: 12px; font-weight: 600; color: var(--text-3); letter-spacing: -.005em; }
+.lp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.lang-pick .lp-opt { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; padding: 0 14px; border-radius: 12px;
+  background: rgba(255,255,255,.05); color: var(--text); font: 400 15px var(--sans); letter-spacing: -.01em; text-align: left; }
+.lang-pick .lp-opt:hover, .lang-pick .lp-opt:focus-visible { background: rgba(255,255,255,.12); }
+.lang-pick .lp-opt[aria-selected="true"] { background: var(--paper); color: var(--ink); }
+.lp-opt small { font-size: 13px; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lp-opt[aria-selected="true"] small { color: var(--ink-3); }
+@media (prefers-reduced-transparency: reduce) { .lp-panel { backdrop-filter: none; -webkit-backdrop-filter: none; background: #1e192e; } }
+@media (max-width: 734px) {
+  .lp { position: static; }
+  .lp-panel { position: fixed; top: auto; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); width: auto; max-height: 72vh; overflow-y: auto; overscroll-behavior: contain; transform-origin: bottom center; }
+}
