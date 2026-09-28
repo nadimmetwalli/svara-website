@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import mark from '../assets/brand/mark-white.png'
 import { useT } from '../hooks/useT'
 import type { TranslationKey } from '../i18n'
 import LanguageSwitch from './LanguageSwitch'
@@ -28,7 +29,10 @@ export default function Nav() {
   return (
     <header className={`lnav${open ? ' open' : ''}`}>
       <div className="wide lnav-bar">
-        <Link className="lnav-title" href="/" translate="no">SVARA</Link>
+        <Link className="lnav-title" href="/" translate="no">
+          <span className="lnav-mark" aria-hidden="true"><img src={mark} alt="" width={16} height={17} /></span>
+          SVARA AI
+        </Link>
         <div className="lnav-end">
           <nav className="lnav-links" aria-label={t('nav.main')}>
             {LINKS.map((l) => <Link key={l.href} href={l.href}>{t(l.key)}</Link>)}
