@@ -12,10 +12,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(resolveLang)
 
   // index.html ships Estonian meta; keep <head> in step with the choice.
+  // <title> is set per page by the app shell (App.tsx).
   useEffect(() => {
     const dict = I18N[lang]
     document.documentElement.lang = lang
-    document.title = dict['meta.title']
     setMeta('meta[name="description"]', dict['meta.description'])
     setMeta('meta[property="og:title"]', dict['meta.title'])
     setMeta('meta[property="og:description"]', dict['meta.ogDescription'])

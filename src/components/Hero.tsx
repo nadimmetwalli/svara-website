@@ -1,49 +1,49 @@
+import mascot from '../assets/brand/mascot.webp'
+import { HERO_SHOT } from '../content/site'
 import { useT } from '../hooks/useT'
+import HeroField from './HeroField'
+import Link from './Link'
+
+/* Frame.io-style split hero: the promise on the left, the real
+   product on the right (the Juhtimiskeskus screenshot from the
+   Näidishotell demo account), with the mascot on one corner and a
+   floating "call in progress" waveform on the other. */
+
+const WAVE_BARS = 40
 
 export default function Hero() {
   const { t } = useT()
-
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const href = e.currentTarget.getAttribute('href')
-    if (!href || href === '#') return
-    const target = document.querySelector(href)
-    if (!target) return
-    e.preventDefault()
-    const top = target.getBoundingClientRect().top + window.scrollY - 72
-    window.scrollTo({ top, behavior: 'smooth' })
-  }
-
   return (
-    <section className="hero" id="home">
-      <div className="hero-bg">
-        <div className="hero-glow-1" />
-        <div className="hero-glow-2" />
-        <div className="hero-glow-3" />
-        <div className="hero-noise" />
-      </div>
-
-      <div className="hero-center">
-        <p className="hero-eyebrow">{t('hero.eyebrow')}</p>
-        <h1 className="hero-h1">
-          {t('hero.title1')}<br />{t('hero.title2')}<br /><em>{t('hero.title3')}</em>
-        </h1>
-      </div>
-
-      <div className="hero-bottom">
-        <div className="hero-bottom-inner">
-          <div className="hero-bottom-left">
-            <div className="hero-rating">
-              <span className="rating-stars">★★★★★</span>
-              <span className="rating-score">4.8</span>
-              <span className="rating-source">Prototron</span>
-            </div>
-            <p className="hero-bottom-desc">{t('hero.desc')}</p>
+    <section className="hero" id="top">
+      <HeroField />
+      <div className="hero-wide hero-grid">
+        <div className="hero-copy">
+          <p className="intro rise rise-1">{t('hero.tagline')}</p>
+          <h1 className="display rise rise-1">
+            {t('hero.title1')} <span className="q">{t('hero.title2')}</span>
+          </h1>
+          <p className="body-lg rise rise-2">{t('hero.lead')}</p>
+          <div className="cta-row rise rise-3">
+            <Link className="pill pill-light" href="/#demo">{t('nav.bookDemo')}</Link>
+            <Link className="more" href="/#kuula">{t('hero.listen')}<span className="chev" aria-hidden="true">›</span></Link>
           </div>
-          <div className="hero-bottom-right">
-            <a href="#demo" className="hero-demo-btn" onClick={handleAnchorClick}>
-              <span>{t('hero.listen')}</span>
-              <div className="demo-orb" />
-            </a>
+        </div>
+        <div className="hero-visual rise rise-4">
+          <img className="mascot" src={mascot} alt="" width={150} height={148} />
+          <figure className="app app-shot">
+            <img src={HERO_SHOT} alt={t('hero.shotAlt')} width={2400} height={1500} fetchPriority="high" />
+          </figure>
+          <div className="live-call" aria-hidden="true">
+            <div className="live-head">
+              <span className="dot" />
+              <span>{t('hero.liveLabel')}</span>
+              <span className="lang-tag">{t('hero.liveLang')}</span>
+            </div>
+            <div className="wave">
+              {Array.from({ length: WAVE_BARS }, (_, i) => (
+                <i key={i} style={{ animationDelay: `${(i % 11) * 0.12}s` }} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
