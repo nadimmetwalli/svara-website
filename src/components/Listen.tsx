@@ -1,22 +1,23 @@
 import { useRef, useState } from 'react'
 import { TRY_IT_HREF } from '../content/site'
-import { FEATURED, VOICES } from '../content/voices'
+import { FEATURED, RTL, VOICES } from '../content/voices'
 import { useT } from '../hooks/useT'
 import { fill, type TranslationKey } from '../i18n'
 import LanguagePicker from './LanguagePicker'
 import Link from './Link'
 
 /* "Kuula ise": pick a language and hear SVARA answer the phone in it.
-   Every clip says the same greeting (see content/voices.ts). The text
-   under the player is what the clip says, in the page language, and
-   its sentences light up as the clip plays. */
+   Under the player: the exact script of the clip in its own language,
+   sentence by sentence as it plays, and, when the clip isn't in the
+   page language, a translation in small text below it. */
 
 const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`
 
 /** Split into sentences and give each a start time proportional to its
     length: a good-enough follow-along for a single speaker. */
 function timeline(text: string, len: number) {
-  const parts = text.match(/[^.!?]+[.!?]+/g)?.map((p) => p.trim()) ?? [text]
+  // Sentence ends in Latin, CJK, Greek (;), Arabic (؟) and Hindi (।) text.
+  const parts = text.match(/[^.!?。！？;;؟।]+(?:[.!?。！？;;؟।]+|$)/g)?.map((p) => p.trim()).filter(Boolean) ?? [text]
   const total = parts.reduce((n, p) => n + p.length, 0)
   let acc = 0
   return parts.map((p) => {
@@ -36,7 +37,7 @@ export default function Listen() {
 
   const voice = VOICES.find((v) => v.code === code)!
   const langName = t(`lang.${code}` as TranslationKey)
-  const lines = timeline(t(`listen.w.${voice.wording}` as TranslationKey), len)
+  const lines = timeline(voice.text, len)
   const nowIdx = playing || pos > 0 ? lines.reduce((acc, l, i) => (pos >= l.at ? i : acc), -1) : -1
   const featured = FEATURED.some((f) => f.code === code)
 
@@ -74,7 +75,7 @@ export default function Listen() {
                 aria-checked={code === f.code}
                 onClick={() => choose(f.code)}
               >
-                {f.label}
+                {f.name}
               </button>
             ))}
           </div>
@@ -94,12 +95,16 @@ export default function Listen() {
             </div>
           </div>
           <div className="track" aria-hidden="true"><i style={{ width: `${Math.min(100, (pos / len) * 100)}%` }} /></div>
-          {code !== lang && <p className="clip-note">{fill(t('listen.translated'), { lang: lang === 'et' ? langName.toLowerCase() : langName })}</p>}
-          <ol className="script clip" lang={lang}>
+          <ol className="script clip" lang={code} dir={RTL.has(code) ? 'rtl' : 'ltr'}>
             {lines.map((l, i) => (
               <li key={i} className={i === nowIdx ? 'now' : undefined}>{l.text}</li>
             ))}
           </ol>
+          {code !== lang && (
+            <p className="clip-trans" lang={lang}>
+              <b>{t('listen.translation')}</b> {t(`listen.w.${voice.wording}` as TranslationKey)}
+            </p>
+          )}
           <audio
             key={voice.audio}
             ref={audioRef}

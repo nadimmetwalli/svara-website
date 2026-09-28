@@ -647,7 +647,6 @@ footer { background: #121019; color: var(--text-3); font-size: 12px; line-height
 }
 
 /* Voice clips: the translated greeting, one sentence per line */
-.clip-note { margin: -4px 0 12px; font-size: 13px; color: var(--ink-3); }
 .script.clip { gap: 6px; font-size: 19px; line-height: 1.4; letter-spacing: -.02em; }
 .script.clip li { display: block; transition: color .3s ease; }
 
@@ -656,3 +655,6 @@ footer { background: #121019; color: var(--text-3); font-size: 12px; line-height
 .facts.contact li:last-child { border-bottom: 0; }
 .facts.contact a { color: var(--link); text-decoration: none; }
 .facts.contact a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.clip-trans { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(31,23,56,.1); font-size: 14px; line-height: 1.5; color: var(--ink-3); }
+.clip-trans b { font-weight: 600; color: var(--ink-2); }
+.script.clip[dir="rtl"] { text-align: right; }
