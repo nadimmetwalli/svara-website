@@ -111,7 +111,7 @@ const et = {
   /* ── Statement ── */
   'statement.label': 'SVARA lühidalt',
   'statement.text':
-    'Kui telefon heliseb kell kolm öösel, keset hommikust check-outi või kui külaline räägib vene keelt, vastab SVARA. Küsimustele, soovidele ja broneeringutele. Ja kui on vaja inimest, suunab ta kõne õigesse osakonda.',
+    'Kui telefon heliseb kell kolm öösel, keset hommikust check-outi või kui külaline räägib võõrast keelt, vastab SVARA. Küsimustele, soovidele ja broneeringutele. Ja kui on vaja inimest, suunab ta kõne õigesse osakonda.',
 
   /* ── Call story ── */
   'story.title': 'Üks kõne, algusest lõpuni.',
@@ -475,7 +475,7 @@ const en: Record<TranslationKey, string> = {
 
   'statement.label': 'SVARA in short',
   'statement.text':
-    'When the phone rings at three in the morning, in the middle of the check-out rush, or when the guest speaks Russian, SVARA answers. Questions, requests and bookings. And when a person is needed, it transfers the call to the right department.',
+    'When the phone rings at three in the morning, in the middle of the check-out rush, or when the guest speaks a foreign language, SVARA answers. Questions, requests and bookings. And when a person is needed, it transfers the call to the right department.',
 
   'story.title': 'One call, start to finish.',
   'story.incoming': 'Incoming call, 03:12',
