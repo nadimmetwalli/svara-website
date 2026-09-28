@@ -30,11 +30,13 @@ export default function Listen() {
   const call = sel.kind === 'call' ? CALLS.find((c) => c.code === sel.code)! : null
   const sample = sel.kind === 'sample' ? SAMPLES.find((s) => s.code === sel.code)! : null
   const audio = call?.audio ?? sample?.audio
-  const lines: CallLine[] = call?.lines ?? [
-    { at: 1, who: 'svara', text: t('listen.sampleL1') },
-    { at: 7, who: 'svara', text: t('listen.sampleL2') },
-  ]
   const len = realLen ?? call?.length ?? 15
+  // Short samples: greeting first, then the answer, which starts a
+  // little before the middle of the clip.
+  const lines: CallLine[] = call?.lines ?? [
+    { at: 0, who: 'svara', text: t('listen.sampleL1') },
+    { at: Math.round(len * 0.42), who: 'svara', text: t('listen.sampleL2') },
+  ]
   const nowIdx = playing || pos > 0 ? lines.reduce((acc, l, i) => (pos >= l.at ? i : acc), -1) : -1
 
   const title = call ? call.title : fill(t('listen.shortTitle'), { lang: t(`lang.${sel.code}` as TranslationKey) })

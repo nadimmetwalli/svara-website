@@ -90,4 +90,4 @@ export type Sample = { code: string; audio?: string }
 
 export const SAMPLES: Sample[] = [
   'lv', 'lt', 'fi', 'sv', 'da', 'no', 'de', 'pl', 'es', 'it', 'pt', 'nl', 'el', 'tr', 'hi', 'zh', 'ja', 'ko',
-].map((code) => ({ code }))
+].map((code) => ({ code, audio: `/calls/samples/${code}.mp3` }))
