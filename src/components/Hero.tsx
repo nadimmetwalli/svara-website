@@ -18,7 +18,7 @@ export default function Hero() {
       <HeroField />
       <div className="hero-wide hero-grid">
         <div className="hero-copy">
-          <p className="intro rise rise-1">{t('hero.tagline')}</p>
+          <p className="tagline rise rise-1">{t('hero.tagline')}</p>
           <h1 className="display rise rise-1">
             {t('hero.title1')} <span className="q">{t('hero.title2')}</span>
           </h1>
