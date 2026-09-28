@@ -12,8 +12,8 @@
    t('your.key') in a component. `{n}`-style placeholders are
    filled with fill() below.
 
-   Call transcripts live in src/content/calls.ts, not here: each
-   one is already in its own language.
+   The voice clips for "Kuula ise" are listed in src/content/voices.ts;
+   what each one says (listen.w.*) is translated here.
 ────────────────────────────────────────────────────────────── */
 
 export type Lang = 'et' | 'en'
@@ -52,7 +52,7 @@ const et = {
   'hero.title2': 'Igal kellaajal.',
   'hero.lead':
     'SVARA vastab külaliste kõnedele ööpäev läbi: küsimused, soovid ja broneeringud. Kui on vaja inimest, suunab kõne õigesse osakonda.',
-  'hero.listen': 'Kuula kõnet',
+  'hero.listen': 'Kuula SVARAt',
   'hero.liveLabel': 'Kõne käib',
   'hero.liveLang': 'Eesti keel',
   'hero.shotAlt': 'SVARA juhtimiskeskus: kõnede arv, keskmine kestus, broneeringud ja viimased kõned eri keeltes',
@@ -136,7 +136,7 @@ const et = {
 
   /* ── Listen ── */
   'listen.title': 'Kuula ise.',
-  'listen.sub': 'Valige keel. Viies keeles kuulete terve kõne, teistes lühikest näidet SVARA häälest.',
+  'listen.sub': 'Valige keel ja kuulake, kuidas SVARA hotelli telefonile vastab.',
   'listen.pick': 'Vali kõne keel',
   'listen.other': 'Muu keel…',
   'listen.otherLabel': 'Muu keel',
@@ -144,13 +144,14 @@ const et = {
   'listen.groupOther': 'Teised keeled',
   'listen.play': 'Esita kõne',
   'listen.pause': 'Peata kõne',
-  'listen.full': 'Terve kõne',
-  'listen.demo': 'Näidisvestlus',
-  'listen.short': 'Lühike näide',
-  'listen.shortTitle': 'SVARA · {lang}',
-  'listen.sampleL1': 'Tere, hotelli vastuvõtt, SVARA kuuleb. Kuidas saan aidata?',
-  'listen.sampleL2': 'Hommikusöök on kella seitsmest kümneni ja parkimine on külalistele tasuta.',
-  'listen.shortNote': 'Tõlge. Selles keeles kuulete SVARA häält ilma külaliseta. Terve vestluse jaoks proovige SVARA-t ise.',
+  'listen.clipTitle': 'SVARA · {lang}',
+  'listen.translated': 'Tõlge. Klipis räägib SVARA {lang} keeles.',
+  'listen.w.std': 'Tere, olete helistanud hotelli! Saan aidata toa broneerimisega, rääkida spaast ja restoranist või ühendada teid vastuvõtuga. Kuidas saan aidata?',
+  'listen.w.baltic': 'Tere, olete helistanud hotelli häälassistendile. Siin saate broneerida toa, uurida spaa ja restorani kohta või saada ühenduse vastuvõtuga. Kuidas saan aidata?',
+  'listen.w.nordic': 'Tere! Olen hotelli häälassistent. Saan aidata toa broneerimisega, rääkida spaast ja restoranist või ühendada teid vastuvõtuga. Kuidas saan aidata?',
+  'listen.w.plru': 'Tere, olete helistanud hotelli! Aitan teil toa broneerida, räägin spaast ja restoranist või ühendan teid vastuvõtuga. Kuidas saan aidata?',
+  'listen.w.hi': 'Tere, olete helistanud hotelli! Siin saate broneerida toa, uurida spaa ja restorani kohta või rääkida vastuvõtuga. Öelge, kuidas saan teid aidata?',
+  'listen.w.ja': 'Tere, olete helistanud hotelli! Saan aidata toa broneerimisega, rääkida spaast ja restoranist või ühendada teid vastuvõtuga. Palun öelge, mida vajate.',
   'listen.tryH': 'Teie keelt pole valikus?',
   'listen.tryP': 'Rääkige SVARA-ga ise, ükskõik mis keeles.',
   'listen.tryCta': 'Proovi ise',
@@ -419,7 +420,7 @@ const en: Record<TranslationKey, string> = {
   'hero.title2': 'Around the clock.',
   'hero.lead':
     'SVARA answers guest calls day and night: questions, requests and bookings. When a person is needed, it transfers the call to the right department.',
-  'hero.listen': 'Hear a call',
+  'hero.listen': 'Hear SVARA',
   'hero.liveLabel': 'Call in progress',
   'hero.liveLang': 'Estonian',
   'hero.shotAlt': 'The SVARA control centre: call volume, average length, bookings and recent calls in several languages',
@@ -497,7 +498,7 @@ const en: Record<TranslationKey, string> = {
   'story.st4p': 'The guest wants a restaurant table too? SVARA transfers the call to the right department. In the morning you see it all on the dashboard.',
 
   'listen.title': 'Hear it yourself.',
-  'listen.sub': 'Choose a language. Five have a full call; the others have a short sample of SVARA’s voice.',
+  'listen.sub': 'Choose a language and hear how SVARA answers the hotel phone.',
   'listen.pick': 'Choose the call language',
   'listen.other': 'Other language…',
   'listen.otherLabel': 'Other language',
@@ -505,13 +506,14 @@ const en: Record<TranslationKey, string> = {
   'listen.groupOther': 'Other languages',
   'listen.play': 'Play call',
   'listen.pause': 'Pause call',
-  'listen.full': 'Full call',
-  'listen.demo': 'Sample conversation',
-  'listen.short': 'Short sample',
-  'listen.shortTitle': 'SVARA · {lang}',
-  'listen.sampleL1': 'Hello, hotel reception, this is SVARA. How can I help?',
-  'listen.sampleL2': 'Breakfast is from seven to ten, and parking is free for guests.',
-  'listen.shortNote': 'Translation. In this language you hear SVARA’s voice without a guest. For a full conversation, try SVARA yourself.',
+  'listen.clipTitle': 'SVARA · {lang}',
+  'listen.translated': 'Translation. In the clip SVARA speaks {lang}.',
+  'listen.w.std': 'Hello, you’ve reached the hotel! I can help you book a room, tell you about the spa and the restaurant, or put you through to reception. How can I help?',
+  'listen.w.baltic': 'Hello, you’ve reached the hotel’s voice assistant. Here you can book a room, find out about the spa and restaurant, or get through to reception. How can I help?',
+  'listen.w.nordic': 'Hello! I’m the hotel’s voice assistant. I can help you book a room, tell you about the spa and the restaurant, or put you through to reception. How can I help?',
+  'listen.w.plru': 'Hello, you’ve reached the hotel! I’ll help you book a room, I’ll tell you about the spa and restaurant, or I’ll put you through to reception. How can I help?',
+  'listen.w.hi': 'Hello, you’ve reached the hotel! Here you can book a room, learn about the spa and restaurant, or talk to reception. Tell me, how can I help you?',
+  'listen.w.ja': 'Hello, you’ve reached the hotel! I can help you book a room, tell you about the spa and the restaurant, or put you through to reception. Please tell me what you need.',
   'listen.tryH': 'Your language isn’t listed?',
   'listen.tryP': 'Talk to SVARA yourself, in any language.',
   'listen.tryCta': 'Try it yourself',
