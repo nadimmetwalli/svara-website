@@ -4,7 +4,7 @@ import kernu from '../assets/logos/kernu.png'
 import taltech from '../assets/logos/taltech.png'
 import tehnopol from '../assets/logos/tehnopol.png'
 import Link from '../components/Link'
-import { CONTACT_EMAIL } from '../content/site'
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_TEL } from '../content/site'
 import { useT } from '../hooks/useT'
 
 /* /meist — who we are, from the booklet. */
@@ -46,12 +46,12 @@ export default function About() {
               </div>
             </div>
             <div className="about-tile">
-              <h2 className="title">{t('about.teamH')}</h2>
-              <div className="person" style={{ marginTop: 4 }}>
-                {/* Swap for Nadim's photo (square JPG, 800 px+) when it's ready. */}
-                <div className="avatar" aria-hidden="true">NM</div>
-                <div><b>Nadim Metwalli</b><span>{t('close.role')}</span><span>{CONTACT_EMAIL}</span></div>
-              </div>
+              <h2 className="title">{t('about.contactH')}</h2>
+              <p>{t('about.contactP')}</p>
+              <ul className="facts contact">
+                <li><span>{t('about.fEmail')}</span><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></li>
+                <li><span>{t('about.fPhone')}</span><a href={`tel:${CONTACT_PHONE_TEL}`}>{CONTACT_PHONE}</a></li>
+              </ul>
             </div>
           </div>
 
