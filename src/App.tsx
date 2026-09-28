@@ -1,53 +1,43 @@
 import { useEffect } from 'react'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Marquee from './components/Marquee'
-import Stats from './components/Stats'
-import Comparison from './components/Comparison'
-import LiveDemo from './components/LiveDemo'
-import Features from './components/Features'
-import HowItWorks from './components/HowItWorks'
-import FoundingHotels from './components/FoundingHotels'
-import Integrations from './components/Integrations'
-import DemoForm from './components/DemoForm'
-import FAQ from './components/FAQ'
-import CTABanner from './components/CTABanner'
 import Footer from './components/Footer'
+import Nav from './components/Nav'
 import { LanguageProvider } from './contexts/LanguageProvider'
+import { useT } from './hooks/useT'
+import About from './pages/About'
+import Home from './pages/Home'
+import Pricing from './pages/Pricing'
+import { scrollToHash, useRoute } from './router'
 
-export default function App() {
+function Shell() {
+  const route = useRoute()
+  const { t, lang } = useT()
+
+  // Page title follows both the page and the language.
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-    )
-    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
+    document.title = route === '/hinnad' ? t('meta.pricingTitle') : route === '/meist' ? t('meta.aboutTitle') : t('meta.title')
+  }, [route, lang, t])
+
+  // Landing on a deep link like /#miks: scroll once the page exists.
+  useEffect(() => {
+    if (window.location.hash) scrollToHash(window.location.hash, false)
   }, [])
 
   return (
-    <LanguageProvider>
-      <Navbar />
-      <Hero />
-      <Marquee />
-      <Stats />
-      <Comparison />
-      <LiveDemo />
-      <Features />
-      <HowItWorks />
-      <FoundingHotels />
-      <Integrations />
-      <DemoForm />
-      <FAQ />
-      <CTABanner />
+    <>
+      <a className="skip" href="#main">{t('nav.skip')}</a>
+      <Nav />
+      <main id="main" tabIndex={-1}>
+        {route === '/hinnad' ? <Pricing /> : route === '/meist' ? <About /> : <Home />}
+      </main>
       <Footer />
+    </>
+  )
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <Shell />
     </LanguageProvider>
   )
 }
