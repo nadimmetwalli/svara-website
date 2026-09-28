@@ -19,13 +19,11 @@ export default function Partners() {
             <img src={gospa} alt="GOSPA, Georg Ots Spa Hotel" width={285} height={104} loading="lazy" />
             <b>Georg Ots Spa Hotel</b>
             <span>{t('partners.gospaCity')}</span>
-            <span className="state-tag live">{t('partners.gospaState')}</span>
           </div>
           <div className="partner">
             <img src={kernu} alt="Kernu Mõis" width={162} height={104} loading="lazy" />
             <b>Kernu Mõis</b>
             <span>{t('partners.kernuCity')}</span>
-            <span className="state-tag">{t('partners.kernuState')}</span>
           </div>
         </div>
         <div className="backers">
