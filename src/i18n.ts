@@ -62,9 +62,7 @@ const et = {
   'partners.title': 'Meie esimesed partnerid.',
   'partners.sub': 'Hotellid, kellega SVARAt koos arendame.',
   'partners.gospaCity': 'Kuressaare',
-  'partners.gospaState': 'Piloot käib',
   'partners.kernuCity': 'Harjumaa',
-  'partners.kernuState': 'Piloot algab',
   'partners.grown': 'Kasvanud',
 
   /* ── Highlights carousel ── */
@@ -381,7 +379,7 @@ const et = {
   'about.grownH': 'Kasvanud ja tunnustatud.',
   'about.grownP': 'SVARA on kasvanud Tehnopoli ja Tallinna Tehnikaülikooli (TalTech) juures ning seda on tunnustanud ka EBS (Estonian Business School) ja Prototron.',
   'about.partnersH': 'Esimesed partnerid.',
-  'about.partnersP': 'Piloot käib Georg Ots Spa Hotelis Kuressaares ja algab peagi Kernu Mõisas.',
+  'about.partnersP': 'Hotellid, kellega SVARAt koos arendame: Georg Ots Spa Hotel Kuressaares ja Kernu Mõis.',
   'about.contactH': 'Kontakt.',
   'about.contactP': 'Kirjutage või helistage, vastame ühe tööpäeva jooksul.',
   'about.fPhone': 'Telefon',
@@ -431,9 +429,7 @@ const en: Record<TranslationKey, string> = {
   'partners.title': 'Our first partners.',
   'partners.sub': 'The hotels we’re building SVARA with.',
   'partners.gospaCity': 'Kuressaare',
-  'partners.gospaState': 'Pilot running',
   'partners.kernuCity': 'Harju County',
-  'partners.kernuState': 'Pilot starting',
   'partners.grown': 'Grown at',
 
   'hl.title': 'Overview.',
@@ -736,7 +732,7 @@ const en: Record<TranslationKey, string> = {
   'about.grownH': 'Grown and recognised.',
   'about.grownP': 'SVARA grew at Tehnopol and Tallinn University of Technology (TalTech) and has been recognised by EBS (Estonian Business School) and Prototron.',
   'about.partnersH': 'First partners.',
-  'about.partnersP': 'A pilot is running at Georg Ots Spa Hotel in Kuressaare and starting soon at Kernu Manor.',
+  'about.partnersP': 'The hotels we’re building SVARA with: Georg Ots Spa Hotel in Kuressaare and Kernu Manor.',
   'about.contactH': 'Contact.',
   'about.contactP': 'Write or call; we reply within one business day.',
   'about.fPhone': 'Phone',
