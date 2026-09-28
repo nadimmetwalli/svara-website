@@ -652,3 +652,9 @@ footer { background: #121019; color: var(--text-3); font-size: 12px; line-height
 .clip-note { margin: -4px 0 12px; font-size: 13px; color: var(--ink-3); }
 .script.clip { gap: 6px; font-size: 19px; line-height: 1.4; letter-spacing: -.02em; }
 .script.clip li { display: block; transition: color .3s ease; }
+
+/* Contact tile on /meist */
+.facts.contact { margin-top: 6px; }
+.facts.contact li:last-child { border-bottom: 0; }
+.facts.contact a { color: var(--link); text-decoration: none; }
+.facts.contact a:hover { text-decoration: underline; text-underline-offset: 3px; }

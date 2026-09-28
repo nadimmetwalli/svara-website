@@ -30,3 +30,7 @@ export const TRY_IT_HREF = '/#demo'
 export const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xrergzpp'
 
 export const CONTACT_EMAIL = 'info@svara-ai.com'
+
+/* Shown as written; `tel:` links use CONTACT_PHONE_TEL. */
+export const CONTACT_PHONE = '(+372) 5865 1641'
+export const CONTACT_PHONE_TEL = '+37258651641'
