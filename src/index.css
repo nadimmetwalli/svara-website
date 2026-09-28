@@ -647,3 +647,8 @@ footer { background: #121019; color: var(--text-3); font-size: 12px; line-height
   .lp { position: static; }
   .lp-panel { position: fixed; top: auto; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); width: auto; max-height: 72vh; overflow-y: auto; overscroll-behavior: contain; transform-origin: bottom center; }
 }
+
+/* Voice clips: the translated greeting, one sentence per line */
+.clip-note { margin: -4px 0 12px; font-size: 13px; color: var(--ink-3); }
+.script.clip { gap: 6px; font-size: 19px; line-height: 1.4; letter-spacing: -.02em; }
+.script.clip li { display: block; transition: color .3s ease; }

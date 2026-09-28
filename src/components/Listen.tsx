@@ -1,76 +1,58 @@
-import { useEffect, useRef, useState } from 'react'
-import { CALLS, SAMPLES, type CallLine } from '../content/calls'
+import { useRef, useState } from 'react'
 import { TRY_IT_HREF } from '../content/site'
+import { FEATURED, VOICES } from '../content/voices'
 import { useT } from '../hooks/useT'
 import { fill, type TranslationKey } from '../i18n'
 import LanguagePicker from './LanguagePicker'
 import Link from './Link'
 
-/* "Kuula ise": pick a language, hear a call.
-   - Full calls (et, en, fr, ru, ar): recorded conversations. With an
-     `audio` file the real recording plays and the badge says
-     "Terve kõne"; without one the transcript runs on a timer and the
-     badge honestly says "Näidisvestlus".
-   - Every other language: a short clip of SVARA alone, with the
-     translation shown in the page language.
-   - "Proovi ise" covers the rest: talk to SVARA yourself. */
-
-type Selection = { kind: 'call'; code: string } | { kind: 'sample'; code: string }
+/* "Kuula ise": pick a language and hear SVARA answer the phone in it.
+   Every clip says the same greeting (see content/voices.ts). The text
+   under the player is what the clip says, in the page language, and
+   its sentences light up as the clip plays. */
 
 const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`
-const TICK = 0.25
+
+/** Split into sentences and give each a start time proportional to its
+    length: a good-enough follow-along for a single speaker. */
+function timeline(text: string, len: number) {
+  const parts = text.match(/[^.!?]+[.!?]+/g)?.map((p) => p.trim()) ?? [text]
+  const total = parts.reduce((n, p) => n + p.length, 0)
+  let acc = 0
+  return parts.map((p) => {
+    const at = (acc / total) * len
+    acc += p.length
+    return { at, text: p }
+  })
+}
 
 export default function Listen() {
   const { t, lang } = useT()
-  const [sel, setSel] = useState<Selection>({ kind: 'call', code: 'et' })
+  const [code, setCode] = useState('et')
   const [playing, setPlaying] = useState(false)
   const [pos, setPos] = useState(0)
-  const [realLen, setRealLen] = useState<number | null>(null)
+  const [len, setLen] = useState(12)
   const audioRef = useRef<HTMLAudioElement>(null)
 
-  const call = sel.kind === 'call' ? CALLS.find((c) => c.code === sel.code)! : null
-  const sample = sel.kind === 'sample' ? SAMPLES.find((s) => s.code === sel.code)! : null
-  const audio = call?.audio ?? sample?.audio
-  const len = realLen ?? call?.length ?? 15
-  // Short samples: greeting first, then the answer, which starts a
-  // little before the middle of the clip.
-  const lines: CallLine[] = call?.lines ?? [
-    { at: 0, who: 'svara', text: t('listen.sampleL1') },
-    { at: Math.round(len * 0.42), who: 'svara', text: t('listen.sampleL2') },
-  ]
+  const voice = VOICES.find((v) => v.code === code)!
+  const langName = t(`lang.${code}` as TranslationKey)
+  const lines = timeline(t(`listen.w.${voice.wording}` as TranslationKey), len)
   const nowIdx = playing || pos > 0 ? lines.reduce((acc, l, i) => (pos >= l.at ? i : acc), -1) : -1
+  const featured = FEATURED.some((f) => f.code === code)
 
-  const title = call ? call.title : fill(t('listen.shortTitle'), { lang: t(`lang.${sel.code}` as TranslationKey) })
-  const badge = sample ? 'listen.short' : audio ? 'listen.full' : 'listen.demo'
-
-  // Timed transcript when there's no recording yet.
-  const posRef = useRef(0)
-  useEffect(() => {
-    if (!playing || audio) return
-    const id = window.setInterval(() => {
-      const next = Math.min(len, posRef.current + TICK)
-      posRef.current = next
-      setPos(next)
-      if (next >= len) setPlaying(false)
-    }, TICK * 1000)
-    return () => window.clearInterval(id)
-  }, [playing, audio, len])
-
-  const choose = (next: Selection) => {
+  const choose = (next: string) => {
     audioRef.current?.pause()
     setPlaying(false)
-    posRef.current = 0
     setPos(0)
-    setRealLen(null)
-    setSel(next)
+    setCode(next)
   }
 
   const toggle = () => {
     const a = audioRef.current
-    if (playing) { a?.pause(); setPlaying(false); return }
-    if (pos >= len) { posRef.current = 0; setPos(0) }
-    if (a) { if (a.ended) a.currentTime = 0; void a.play() }
-    setPlaying(true)
+    if (!a) return
+    if (playing) { a.pause(); return }
+    if (a.ended) a.currentTime = 0
+    void a.play()
   }
 
   return (
@@ -83,23 +65,20 @@ export default function Listen() {
 
         <div className="lang-pick">
           <div role="radiogroup" aria-label={t('listen.pick')} className="lang-radios">
-            {CALLS.map((c) => (
+            {FEATURED.map((f) => (
               <button
-                key={c.code}
+                key={f.code}
                 type="button"
                 role="radio"
-                lang={c.code}
-                aria-checked={sel.kind === 'call' && sel.code === c.code}
-                onClick={() => choose({ kind: 'call', code: c.code })}
+                lang={f.code}
+                aria-checked={code === f.code}
+                onClick={() => choose(f.code)}
               >
-                {c.label}
+                {f.label}
               </button>
             ))}
           </div>
-          <LanguagePicker
-            selected={sel.kind === 'sample' ? sel.code : null}
-            onPick={(code) => choose({ kind: 'sample', code })}
-          />
+          <LanguagePicker selected={featured ? null : code} onPick={choose} />
         </div>
 
         <div className="player">
@@ -108,32 +87,30 @@ export default function Listen() {
               {playing ? '❚❚' : '▶'}
             </button>
             <div className="player-meta">
-              <span lang={call ? call.code : lang} style={{ display: 'inline', color: 'var(--ink)', fontSize: 17, fontWeight: 600 }}>{title}</span>
-              <span className={`kind${badge === 'listen.full' ? ' full' : ''}`}>{t(badge)}</span>
+              <span style={{ display: 'inline', color: 'var(--ink)', fontSize: 17, fontWeight: 600 }}>
+                {fill(t('listen.clipTitle'), { lang: langName })}
+              </span>
               <span>{fmt(Math.min(pos, len))} / {fmt(len)}</span>
             </div>
           </div>
           <div className="track" aria-hidden="true"><i style={{ width: `${Math.min(100, (pos / len) * 100)}%` }} /></div>
-          <ol className="script" dir={call?.dir ?? 'ltr'} lang={call ? call.code : lang}>
+          {code !== lang && <p className="clip-note">{fill(t('listen.translated'), { lang: lang === 'et' ? langName.toLowerCase() : langName })}</p>}
+          <ol className="script clip" lang={lang}>
             {lines.map((l, i) => (
-              <li key={i} className={i === nowIdx ? 'now' : undefined}>
-                <time>{fmt(l.at)}</time>
-                <div><small>{l.who === 'svara' ? 'SVARA' : call?.guest}</small>{l.text}</div>
-              </li>
+              <li key={i} className={i === nowIdx ? 'now' : undefined}>{l.text}</li>
             ))}
           </ol>
-          {sample && <p className="sample-note">{t('listen.shortNote')}</p>}
-          {audio && (
-            <audio
-              key={audio}
-              ref={audioRef}
-              src={audio}
-              preload="metadata"
-              onLoadedMetadata={(e) => setRealLen(e.currentTarget.duration)}
-              onTimeUpdate={(e) => setPos(e.currentTarget.currentTime)}
-              onEnded={() => setPlaying(false)}
-            />
-          )}
+          <audio
+            key={voice.audio}
+            ref={audioRef}
+            src={voice.audio}
+            preload="metadata"
+            onLoadedMetadata={(e) => setLen(e.currentTarget.duration || 12)}
+            onTimeUpdate={(e) => setPos(e.currentTarget.currentTime)}
+            onPlay={() => setPlaying(true)}
+            onPause={() => setPlaying(false)}
+            onEnded={() => { setPlaying(false); setPos(len) }}
+          />
         </div>
 
         <div className="try">

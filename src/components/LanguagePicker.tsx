@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
-import { SAMPLES } from '../content/calls'
+import { OTHERS } from '../content/voices'
 import { useT } from '../hooks/useT'
 import type { TranslationKey } from '../i18n'
 
@@ -12,8 +12,8 @@ import type { TranslationKey } from '../i18n'
 
 type Props = { selected: string | null; onPick: (code: string) => void }
 
-const NEAR = SAMPLES.filter((s) => s.near)
-const OTHER = SAMPLES.filter((s) => !s.near)
+const NEAR = OTHERS.filter((s) => s.near)
+const OTHER = OTHERS.filter((s) => !s.near)
 const ORDER = [...NEAR, ...OTHER] // keyboard order = visual order
 
 export default function LanguagePicker({ selected, onPick }: Props) {
